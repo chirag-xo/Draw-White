@@ -1,0 +1,156 @@
+.section {
+  background: #fff;
+  padding: 120px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.header {
+  max-width: var(--max-width);
+  margin: 0 auto 64px auto;
+  padding: 0 var(--gutter);
+}
+
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.4);
+  margin-bottom: 24px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: #000;
+  max-width: 600px;
+  font-weight: 300;
+}
+
+
+/* Marquee Container with Edge Masks */
+.marqueeContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 40px 0;
+  cursor: grab;
+}
+
+.track {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  align-items: center;
+}
+
+/* Base Card Style */
+.card {
+  flex-shrink: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+/* Image Card */
+.imageCard {
+  width: 380px;
+  aspect-ratio: 4 / 5;
+  background: #111;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .image {
+  transform: scale(1.08);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+  opacity: 0.6;
+}
+
+.imageCaption {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Quote Card */
+.quoteCard {
+  width: 480px;
+  padding: 60px;
+  background: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.quoteText {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.8vw, 24px);
+  line-height: 1.5;
+  color: #000;
+  letter-spacing: -0.01em;
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+
+.quoteMetadata {
+  margin-top: auto;
+}
+
+.author {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #000;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.role {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 0;
+  }
+  
+  .imageCard {
+    width: 280px;
+  }
+  
+  .quoteCard {
+    width: 320px;
+    padding: 32px;
+  }
+  
+  .marqueeContainer::before,
+  .marqueeContainer::after {
+    width: 100px;
+  }
+}

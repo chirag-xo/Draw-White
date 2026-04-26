@@ -1,0 +1,384 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 72px;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    height 0.4s var(--ease-smooth),
+    border-color 0.4s var(--ease-smooth),
+    box-shadow 0.4s var(--ease-smooth);
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background: rgba(255, 255, 255, 0.85);
+  /* Clean white glass */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease-smooth);
+}
+
+.navbar.scrolled {
+  height: 60px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.04);
+}
+
+.navbar.scrolled::before {
+  opacity: 1;
+}
+
+.homeTop {
+  color: #f5f1ea;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Desktop Nav ────────────────────────────────────────── */
+.desktopNav {
+  display: none;
+  width: 100%;
+  align-items: center;
+  /* 3-zone: [spacer] [centred trio] [Let's Talk] */
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .desktopNav {
+    display: flex;
+  }
+}
+
+/* Left spacer — same flex-basis as navRight so trio is optically centred */
+.navSpacer {
+  flex: 1;
+}
+
+/* The three centred members with premium spacing */
+.navCentre {
+  display: flex;
+  align-items: center;
+  gap: clamp(32px, 4vw, 64px);
+  flex-shrink: 0;
+}
+
+/* Right zone — same flex as navSpacer */
+.navRight {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--color-text-primary);
+  transition: opacity 0.3s ease;
+}
+
+.logoLink:hover {
+  opacity: 0.7;
+}
+
+.navLink {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #0A0A0A;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+}
+
+.navLink:hover {
+  color: var(--color-text-primary);
+}
+
+/* Roll-over text effect */
+.rollTextOuter {
+  overflow: hidden;
+  display: inline-flex;
+}
+
+.rollTextInner {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.rollTextInner::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.navLink:hover .rollTextInner,
+.dropdownTrigger:hover .rollTextInner,
+.dropdownItem:hover .rollTextInner {
+  transform: translateY(-100%);
+}
+
+/* Dark nav links when navbar is transparent (over light hero) */
+.navbar:not(.scrolled) .navLink {
+  color: #0A0A0A;
+}
+
+.navbar.homeTop .navLink,
+.navbar.homeTop .dropdownTrigger,
+.navbar.homeTop .logoLink,
+.navbar.homeTop .mobileLogo {
+  color: #f5f1ea;
+}
+
+.navbar.homeTop .ctaCircle {
+  color: #f5f1ea;
+  border-color: rgba(245, 241, 234, 0.4);
+}
+
+.navbar.homeTop .ctaCircle:hover {
+  background: #f5f1ea;
+  border-color: #f5f1ea;
+  color: #0a0a0a;
+}
+
+.navbar.homeTop .hamburger span {
+  background: #f5f1ea;
+}
+
+/* ── Studio Dropdown ────────────────────────────────────── */
+.dropdownWrap {
+  position: relative;
+}
+
+.dropdownTrigger {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #0A0A0A;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s ease;
+  padding: 0;
+}
+
+.dropdownTrigger:hover {
+  color: var(--color-text-primary);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  /* translateX(-50%) applied via inline style for animation */
+  min-width: 180px;
+  background: rgba(238, 238, 238, 0.96);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 14px;
+  padding: 8px 0;
+  box-shadow:
+    0 16px 48px -8px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+  z-index: 200;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.dropdownGlow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-radius: 14px 14px 0 0;
+  background: linear-gradient(to right,
+      transparent 10%,
+      rgba(0, 0, 0, 0.06) 50%,
+      transparent 90%);
+}
+
+.dropdownItem {
+  display: block;
+  padding: 11px 24px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.72);
+  text-decoration: none;
+  transition: color 0.2s ease, background 0.2s ease, padding-left 0.2s ease;
+}
+
+.dropdownItem:hover {
+  color: var(--color-text-primary);
+  background: rgba(0, 0, 0, 0.04);
+  padding-left: 28px;
+}
+
+.dropdownDivider {
+  height: 0.5px;
+  margin: 0 18px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* ── Let's Talk pill CTA ────────────────────────────────── */
+.ctaCircle {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid rgba(10, 10, 10, 0.6);
+  border-radius: 100px;
+  padding: 8px 18px;
+  color: #0A0A0A;
+  background: transparent;
+  white-space: nowrap;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.ctaCircle:hover {
+  background: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+  color: var(--color-bg-primary);
+}
+
+/* ── Mobile Row ─────────────────────────────────────────── */
+.mobileRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .mobileRow {
+    display: none;
+  }
+}
+
+.mobileLogo {
+  display: flex;
+  align-items: center;
+  color: var(--color-text-primary);
+}
+
+/* ── Hamburger ──────────────────────────────────────────── */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-text-primary);
+  transition: transform 0.4s var(--ease-smooth), opacity 0.25s ease;
+}
+
+.hamburger.open span:first-child {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:last-child {
+  transform: translateY(-0px) rotate(-45deg);
+}
+
+/* ── Mobile Menu Overlay ────────────────────────────────── */
+.mobileMenu {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-primary);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 120px var(--gutter) var(--space-xl);
+  z-index: 999;
+  transform: translateX(100%);
+  transition: transform var(--duration-mid) var(--ease-in-out);
+}
+
+.mobileMenu.mobileOpen {
+  transform: translateX(0);
+}
+
+.mobileLink {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 8vw, 68px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  letter-spacing: var(--tracking-tight);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+  transition: padding-left 0.25s var(--ease-out);
+}
+
+.mobileLink:hover {
+  padding-left: 12px;
+}
+
+.mobileCta {
+  margin-top: var(--space-xl);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-text-primary);
+  border-radius: 100px;
+  padding: 14px 32px;
+  display: inline-block;
+  align-self: flex-start;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.mobileCta:hover {
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
+}

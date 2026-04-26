@@ -1,0 +1,116 @@
+.section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Parallax image */
+.imageWrap {
+  position: absolute;
+  inset: -15%;
+  will-change: transform;
+  transition: transform 0.05s linear;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.85) 0%,
+    rgba(0,0,0,0.3) 50%,
+    rgba(0,0,0,0.05) 100%
+  );
+  z-index: 1;
+}
+
+/* Content */
+.content {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-2xl) var(--gutter);
+  max-width: var(--container);
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 1s var(--ease-out) 0.2s,
+    transform 1s var(--ease-out) 0.2s;
+}
+
+.content.visible { opacity: 1; transform: none; }
+
+.eyebrow {
+  color: var(--color-accent);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 300;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-tight);
+  color: #fff;
+  max-width: 10ch;
+}
+
+.meta {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 4px;
+  align-self: flex-start;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    gap var(--duration-fast) var(--ease-out);
+}
+
+.cta:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.7);
+  gap: 16px;
+}
+
+.ctaArrow { transition: transform var(--duration-fast) var(--ease-out); }
+.cta:hover .ctaArrow { transform: translateX(4px); }
+
+/* Float label */
+.floatLabel {
+  position: absolute;
+  top: var(--space-xl);
+  right: var(--gutter);
+  z-index: 2;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(13px, 1.2vw, 18px);
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.04em;
+  writing-mode: vertical-rl;
+  opacity: 0;
+  transition: opacity 1s var(--ease-out) 0.6s;
+}
+
+.floatLabel.visible { opacity: 1; }

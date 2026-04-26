@@ -1,0 +1,290 @@
+/* ============================================================
+   DRAW Studio — Global Design Token System
+   Typography: NT Ginder Sans Mini Edition
+   ============================================================ */
+
+/* ── NT GINDER SANS ──────────────────────────────────────────
+   Single-weight display sans. No italic or bold variants.
+   Used for all headlines, UI labels, and body text.
+   Libre Caslon Condensed retained as editorial italic accent.
+   ──────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'NT Ginder Sans';
+  src: url('/fonts/NT_ginder_sans/Nt Ginder Mini Edition.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Libre Caslon removed — NT Ginder Sans used everywhere */
+
+/* ── RESET ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-bg-white);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  overflow-x: hidden;
+}
+
+img, video {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ── COLOR TOKENS ───────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --color-bg-primary:   #F2F2F2;
+  --color-bg-white:     #FFFFFF;
+  --color-bg-warm:      #EBEBEB;
+  --color-bg-dark:      #0A0A0A;
+  --color-bg-dark-soft: #111111;
+
+  /* Text */
+  --color-text-primary: #0A0A0A;
+  --color-text-on-dark: #F2F2F2;
+  --color-text-muted:   #666666;
+  --color-text-subtle:  #999999;
+
+  /* Accent */
+  --color-accent:       #808080;
+  --color-accent-light: #CCCCCC;
+
+  /* Borders */
+  --color-border:       rgba(10, 10, 10, 0.08);
+  --color-border-dark:  rgba(242, 242, 242, 0.12);
+
+  /* Layout */
+  --nav-height: 72px;
+}
+
+/* ── TYPOGRAPHY TOKENS ──────────────────────────────────────── */
+/*
+  NT Ginder Sans is the primary typeface across display, UI, and body.
+  Libre Caslon Condensed italic is kept exclusively for editorial
+  accent spans (the .font-serif-accent class).
+
+  TYPE SCALE — fixed stepped sizes (not fluid clamp).
+  Sizes are proven from editorial print tradition:
+  Hero      → 96px desktop / 52px mobile
+  Display   → 64px desktop / 36px mobile
+  Title     → 44px desktop / 28px mobile
+  Lead      → 22px desktop / 18px mobile
+  Body      → 17px (all breakpoints — optimal reading measure)
+  Small     → 13px
+  Eyebrow   → 11px
+
+  These are overridden per breakpoint in the media query block below.
+*/
+:root {
+  --font-display: 'NT Ginder Sans', -apple-system, sans-serif;
+  --font-serif:   'NT Ginder Sans', -apple-system, sans-serif;
+  --font-ui:      'NT Ginder Sans', -apple-system, sans-serif;
+  --font-body:    'NT Ginder Sans', -apple-system, sans-serif;
+
+  /* Desktop type scale (≥1024px) */
+  --text-hero:    96px;
+  --text-display: 64px;
+  --text-title:   44px;
+  --text-lead:    22px;
+  --text-body:    17px;
+  --text-small:   13px;
+  --text-eyebrow: 11px;
+
+  /* Tracking */
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide:   0.14em;
+
+  /* Leading */
+  --leading-display: 0.94;
+  --leading-title:   1.06;
+  --leading-body:    1.65;
+}
+
+/* ── BREAKPOINT OVERRIDES ── Tablet (≤1024px) ───────────────── */
+@media (max-width: 1024px) {
+  :root {
+    --text-hero:    72px;
+    --text-display: 52px;
+    --text-title:   36px;
+    --text-lead:    20px;
+    --text-body:    17px;
+    --text-small:   13px;
+    --text-eyebrow: 11px;
+  }
+}
+
+/* ── BREAKPOINT OVERRIDES ── Mobile (≤768px) ────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --text-hero:    52px;
+    --text-display: 36px;
+    --text-title:   28px;
+    --text-lead:    18px;
+    --text-body:    16px;
+    --text-small:   13px;
+    --text-eyebrow: 10px;
+  }
+}
+
+/* ── BREAKPOINT OVERRIDES ── Small mobile (≤480px) ──────────── */
+@media (max-width: 480px) {
+  :root {
+    --text-hero:    40px;
+    --text-display: 30px;
+    --text-title:   24px;
+    --text-lead:    17px;
+    --text-body:    16px;
+    --text-small:   12px;
+    --text-eyebrow: 10px;
+  }
+}
+
+/* ── MOTION TOKENS ──────────────────────────────────────────── */
+:root {
+  --ease-smooth:  cubic-bezier(0.25, 0.1, 0.25, 1.0);
+  --ease-out:     cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1);
+
+  --duration-fast:   200ms;
+  --duration-mid:    500ms;
+  --duration-slow:   800ms;
+  --duration-cinema: 1200ms;
+
+  --img-hover-scale: 1.06;
+  --stagger-step:    80ms;
+}
+
+/* ── SPACING TOKENS ─────────────────────────────────────────── */
+:root {
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  32px;
+  --space-lg:  64px;
+  --space-xl:  96px;
+  --space-2xl: 144px;
+  --space-3xl: 192px;
+
+  --container: 1440px;
+  --gutter:    clamp(24px, 4vw, 64px);
+  --col-gap:   clamp(16px, 2vw, 32px);
+}
+
+/* ── LAYOUT UTILITIES ───────────────────────────────────────── */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.section-pad {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.section-pad-lg {
+  padding-top: calc(var(--space-3xl) * 1.5);
+  padding-bottom: calc(var(--space-3xl) * 1.5);
+}
+
+/* ── TYPOGRAPHY UTILITIES ───────────────────────────────────── */
+.font-display  { font-family: var(--font-display); }
+.font-ui       { font-family: var(--font-ui); }
+.font-body     { font-family: var(--font-body); }
+
+/* Editorial accent — NT Ginder Sans, matches surrounding tracking */
+.font-serif-accent {
+  font-family: var(--font-serif);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.text-hero    { font-size: var(--text-hero);    line-height: var(--leading-display); letter-spacing: var(--tracking-tight); }
+.text-display { font-size: var(--text-display); line-height: var(--leading-display); letter-spacing: var(--tracking-tight); }
+.text-title   { font-size: var(--text-title);   line-height: var(--leading-title);   letter-spacing: var(--tracking-tight); }
+.text-lead    { font-size: var(--text-lead);    line-height: var(--leading-body); }
+.text-body    { font-size: var(--text-body);    line-height: var(--leading-body); }
+.text-small   { font-size: var(--text-small);   line-height: 1.5; }
+.text-eyebrow {
+  font-size: var(--text-eyebrow);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  font-family: var(--font-ui);
+  font-weight: 400;
+}
+
+/* ── GLOBAL REVEAL ANIMATIONS ───────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  filter: blur(4px);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out),
+    filter var(--duration-slow) var(--ease-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.reveal-delay-1 { transition-delay: calc(var(--stagger-step) * 1); }
+.reveal-delay-2 { transition-delay: calc(var(--stagger-step) * 2); }
+.reveal-delay-3 { transition-delay: calc(var(--stagger-step) * 3); }
+.reveal-delay-4 { transition-delay: calc(var(--stagger-step) * 4); }
+.reveal-delay-5 { transition-delay: calc(var(--stagger-step) * 5); }
+
+/* ── SCROLLBAR ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-primary); }
+::-webkit-scrollbar-thumb { background: rgba(10,10,10,0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(10,10,10,0.4); }
+
+/* ── UTILITIES ──────────────────────────────────────────────── */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.ease-out-expo {
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* ── SELECTION ──────────────────────────────────────────────── */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg-white);
+}

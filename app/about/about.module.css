@@ -1,0 +1,246 @@
+.page {
+  background: var(--color-bg-white);
+  padding-top: 100px;
+}
+
+/* Manifesto Hero */
+.manifestoHero {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--gutter);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.eyebrow { color: var(--color-text-subtle); }
+
+.manifestoTitle {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 80px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+  max-width: 18ch;
+}
+
+/* Split section */
+.splitSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 80vh;
+}
+
+.splitImage { position: relative; overflow: hidden; }
+
+.splitText {
+  padding: var(--space-3xl) var(--space-2xl) var(--space-3xl) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+
+.sectionLabel { color: var(--color-text-subtle); }
+
+.storyText {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 30px);
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+}
+
+.storyBody {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: var(--leading-body);
+  color: var(--color-text-muted);
+  max-width: 50ch;
+}
+
+/* Values */
+.valuesSection {
+  background: var(--color-bg-white);
+  padding: var(--space-3xl) 0;
+}
+
+.valuesContainer {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--col-gap);
+}
+
+.valueItem {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md) var(--space-md) var(--space-xl);
+  background: var(--color-bg-primary); /* The light grey #F2F2F2 */
+  height: 100%;
+  min-height: 420px; /* Further reduced for a tighter look */
+  opacity: 1 !important; /* Ensure visibility even if reveal trigger is slow */
+}
+
+.valueAnimation {
+  height: 240px; /* Fixed height to ensure text alignment below */
+  flex: none; /* Prevent flex growth/shrinkage from affecting alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: var(--space-lg);
+  color: #000000; /* Pure black for maximum impact on animations */
+}
+
+.valueAnimation :global(svg) {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 280px;
+  max-height: 180px;
+  overflow: visible !important;
+}
+
+.valueAnimation :global(svg) :global(path),
+.valueAnimation :global(svg) :global(circle),
+.valueAnimation :global(svg) :global(rect),
+.valueAnimation :global(svg) :global(polygon),
+.valueAnimation :global(svg) :global(ellipse),
+.valueAnimation :global(svg) :global(g) {
+  stroke: currentColor !important;
+}
+
+.valueAnimation :global(svg) :global([fill]):not([fill="none"]) {
+  fill: var(--color-bg-primary);
+}
+
+.valueNum {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 11px;
+  color: var(--color-accent);
+  letter-spacing: 0.1em;
+}
+
+.valueContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  justify-content: flex-start;
+}
+
+.valueTitle {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 500;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.valueBody {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* Team */
+.teamSection {
+  background: var(--color-bg-warm);
+  padding: var(--space-3xl) var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.teamGrid {
+  max-width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--col-gap);
+  width: 100%;
+}
+
+.teamCard { display: flex; flex-direction: column; gap: var(--space-sm); }
+
+.teamPortrait {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: var(--color-bg-primary);
+}
+
+.teamPortrait img {
+  filter: grayscale(60%);
+  transition: filter var(--duration-slow) var(--ease-smooth), transform var(--duration-slow) var(--ease-smooth);
+}
+
+.teamCard:hover .teamPortrait img { filter: grayscale(0); transform: scale(1.04); }
+
+.teamName {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.8vw, 28px);
+  font-weight: 400;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+}
+
+.teamRole {
+  font-family: var(--font-ui);
+  font-size: var(--text-eyebrow);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+}
+
+.teamBio {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* CTA */
+.ctaSection {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--color-border);
+}
+
+.ctaTitle {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 52px);
+  font-weight: 300;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+}
+
+.ctaLink {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-text-primary);
+  padding-bottom: 2px;
+  white-space: nowrap;
+  transition: opacity var(--duration-fast);
+}
+
+.ctaLink:hover { opacity: 0.6; }

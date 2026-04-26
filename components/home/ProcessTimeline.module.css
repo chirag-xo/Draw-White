@@ -1,0 +1,152 @@
+.section {
+  position: relative;
+  background: #ffffff;
+  color: #000000;
+  padding: clamp(96px, 12vw, 180px) var(--gutter);
+  overflow: hidden;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/sketches/p1.png');
+  background-size: cover;
+  background-position: -5% center;
+  opacity: 0.1; /* Lower opacity for a subtle editorial feel */
+  mix-blend-mode: multiply; /* Blends better with white background */
+  pointer-events: none;
+  z-index: 0;
+  /* Smooth start and end using masking */
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 100px;
+  }
+}
+
+.header {
+  grid-column: span 1;
+}
+
+@media (min-width: 1024px) {
+  .header {
+    grid-column: span 5;
+    position: sticky;
+    top: 140px;
+  }
+}
+
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.4);
+  margin-bottom: 24px;
+  display: block;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: #000000;
+  font-weight: 300;
+}
+
+.subtitle {
+  margin-top: 32px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.5);
+  max-width: 360px;
+}
+
+.cardsGrid {
+  grid-column: span 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cardsGrid {
+    grid-column: span 7;
+  }
+}
+
+.processCard {
+  background: #f8f8f8;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 48px 40px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.processCard:hover {
+  background: #000000;
+  color: #ffffff;
+  transform: translateY(-8px);
+  border-color: #000000;
+}
+
+.stepNumber {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: rgba(0, 0, 0, 0.3);
+  transition: color 0.4s ease;
+}
+
+.processCard:hover .stepNumber {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.stepDescription {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(0, 0, 0, 0.6);
+  transition: color 0.4s ease;
+}
+
+.processCard:hover .stepDescription {
+  color: rgba(255, 255, 255, 0.7);
+}

@@ -1,0 +1,192 @@
+.section {
+  position: relative;
+  background: #ffffff;
+  color: #000000;
+  padding: clamp(80px, 12vw, 160px) var(--gutter);
+}
+
+.backgroundWrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: -10%;
+  transform: none;
+  height: 100%;
+  width: 120%;
+  object-fit: cover;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+  /* Smooth transitions at top and bottom */
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 80px;
+  }
+}
+
+.header {
+  grid-column: span 1;
+}
+
+@media (min-width: 1024px) {
+  .header {
+    grid-column: span 5;
+    position: sticky;
+    top: 120px;
+  }
+}
+
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.4);
+  margin-bottom: 24px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.1; /* Increased for breathing room */
+  letter-spacing: -0.04em;
+  color: #000000;
+  font-weight: 300;
+  padding: 0.2em 0; /* Extra space to prevent cutting */
+}
+
+.subtitle {
+  margin-top: 32px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.6);
+  max-width: 380px;
+}
+
+.list {
+  grid-column: span 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (min-width: 1024px) {
+  .list {
+    grid-column: span 7;
+  }
+}
+
+.card {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #C0C0C0; /* SILVER as requested */
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.005);
+  background: #d0d0d0;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.cardOpen {
+  background: #b0b0b0;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.12);
+}
+
+
+.trigger {
+  width: 100%;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 32px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.triggerText {
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.8vw, 18px);
+  font-weight: 500;
+  color: #000000; /* BLACK TEXT as requested */
+  letter-spacing: -0.01em;
+  transition: opacity 0.3s ease;
+  line-height: 1.4;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.4);
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.iconOpen {
+  transform: rotate(45deg) scale(1.1);
+  color: #000000;
+}
+
+.content {
+  overflow: hidden; /* Necessary for GSAP height animation */
+  transition: height 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.contentInner {
+  padding: 0.5em 0 0; /* Add top padding to prevent top character clipping in reveal */
+}
+
+.answer {
+  padding: 0 32px 32px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.7); /* DARKER TEXT for visibility on Gunmetal */
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.answerHidden {
+  opacity: 0;
+  transform: translateY(-5px);
+}
+
+.answerVisible {
+  opacity: 1;
+  transform: translateY(0);
+}

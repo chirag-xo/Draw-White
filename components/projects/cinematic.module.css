@@ -1,0 +1,194 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #ffffff;
+  color: #000000;
+  overflow: hidden;
+}
+
+.intro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--gutter);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.pageTitle {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 120px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: var(--tracking-tighter);
+}
+
+.viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+
+/* Project Slide */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.imageWrap {
+  position: relative;
+  width: 65vw;
+  height: 80vh;
+  overflow: hidden;
+  background: #f8f8f8;
+}
+
+.image {
+  object-fit: cover;
+  will-change: transform, scale;
+}
+
+/* Overlays - Floorplans/Sketches */
+.architecturalOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.04;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sketch {
+  width: 50%;
+  height: auto;
+  filter: grayscale(1) invert(0);
+}
+
+/* Info Layer */
+.infoLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--gutter);
+}
+
+.projectInfo {
+  max-width: 500px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.projectNum {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  margin-bottom: 20px;
+  display: block;
+  opacity: 0.5;
+}
+
+.projectName {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 80px);
+  line-height: 1;
+  margin-bottom: 16px;
+  font-weight: 300;
+}
+
+.projectMeta {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 32px;
+  display: block;
+}
+
+.projectConcept {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.5;
+  color: #333;
+  max-width: 40ch;
+}
+
+.projectLink {
+  pointer-events: auto;
+  margin-top: 40px;
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid #000;
+  padding-bottom: 4px;
+  text-decoration: none;
+  color: #000;
+  transition: opacity 0.3s;
+}
+
+.projectLink:hover {
+  opacity: 0.5;
+}
+
+/* Progress Indicator */
+.progress {
+  position: absolute;
+  right: var(--gutter);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.dotActive {
+  background: #000;
+}
+
+@media (max-width: 1024px) {
+  .imageWrap {
+    width: 90vw;
+    height: 60vh;
+  }
+  
+  .infoLayer {
+    justify-content: flex-end;
+    padding-bottom: 10vh;
+  }
+  
+  .projectInfo {
+    max-width: 100%;
+  }
+}

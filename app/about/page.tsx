@@ -1,0 +1,89 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
+import RevealStagger from '@/components/animations/RevealStagger';
+import OurJourney from '@/components/about/OurJourney';
+import SupportingTeam from '@/components/about/SupportingTeam';
+import FounderSection from '@/components/about/FounderSection';
+import LottiePlayer from '@/components/about/LottiePlayer';
+import styles from './about.module.css';
+
+import clarityData from '@/public/animations/clarity.json';
+import CubeData from '@/public/animations/Cube.json';
+import empathyData from '@/public/animations/empathy.json';
+import enduranceData from '@/public/animations/endurance.json';
+
+export default function AboutPage() {
+  return (
+    <div className={styles.page}>
+      {/* Manifesto Hero */}
+      <div className={styles.manifestoHero}>
+        <RevealStagger>
+          <p className={`text-eyebrow ${styles.eyebrow}`}>Founded 2010</p>
+          <AnimatedHeading
+            elementType="h1"
+            className={styles.manifestoTitle}
+          >
+            We <span className="font-serif-accent">believe</span> the best room is the one that asks<span className="font-serif-accent"> nothing</span> of you.
+          </AnimatedHeading>
+        </RevealStagger>
+      </div>
+
+      <OurJourney />
+
+      {/* Values */}
+      <div className={styles.valuesSection}>
+        <div className={styles.valuesContainer}>
+          <AnimatedHeading elementType="p" className={`text-eyebrow ${styles.sectionLabel}`}>
+            Core Values
+          </AnimatedHeading>
+          <RevealStagger
+            stagger={0.1}
+            itemSelector={`.${styles.valueItem}`}
+            className={styles.valuesGrid}
+          >
+            {[
+              { title: 'Clarity', body: 'Every space begins with a singular idea. Reduced, refined, and resolved into its most essential form.', data: clarityData },
+              { title: 'Precision', body: 'Every detail is considered. From material to junction, nothing is accidental—everything is intentional.', data: CubeData },
+              { title: 'Empathy', body: 'Design begins with people. Spaces adapt to how they are lived, felt, and experienced.', data: empathyData },
+              { title: 'Endurance', body: 'Built to last beyond trends. Quiet, balanced environments that remain relevant over time.', data: enduranceData },
+            ].map((v, idx) => (
+              <div key={idx} className={styles.valueItem}>
+                <LottiePlayer
+                  animationData={v.data}
+                  className={styles.valueAnimation}
+                />
+                <div className={styles.valueContent}>
+                  <AnimatedHeading elementType="h3" className={styles.valueTitle}>
+                    {v.title}
+                  </AnimatedHeading>
+                  <p className={styles.valueBody}>{v.body}</p>
+                </div>
+              </div>
+            ))}
+          </RevealStagger>
+        </div>
+      </div>
+
+      {/* Founders */}
+      <FounderSection />
+
+      {/* Supporting Team */}
+      <SupportingTeam />
+
+      {/* CTA */}
+      <div className={styles.ctaSection}>
+        <RevealStagger>
+          <AnimatedHeading elementType="h2" className={styles.ctaTitle}>
+            Ready to <span className="font-serif-accent">start a conversation</span>?
+          </AnimatedHeading>
+          <Link href="/contact" className={styles.ctaLink}>
+            Contact the studio →
+          </Link>
+        </RevealStagger>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,102 @@
+/* Loader blanket */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  will-change: opacity;
+  pointer-events: none;
+}
+
+/* Ambient glow beneath logo */
+.logoWrap::before {
+  content: '';
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, transparent 68%);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -46%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Subtle loader scan line */
+.scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.04), transparent);
+  top: 0;
+  pointer-events: none;
+  z-index: 2;
+  animation: scanlineAnim 2.8s linear 0.2s 1 forwards;
+  opacity: 0;
+}
+@keyframes scanlineAnim {
+  0% { top: 0%; opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* SVG wrap */
+.logoWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform;
+  transform-origin: 50% 50%;
+}
+
+.logoSvg {
+  width: 180px;
+  height: 198px;
+  display: block;
+  overflow: visible;
+}
+
+.lp {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.2;
+}
+
+/* Brand text */
+.loaderText {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.ltName {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 22px;
+  letter-spacing: .58em;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: normal;
+  white-space: nowrap;
+  text-indent: .58em; /* optically centres the tracked text */
+}
+
+.ltSub {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 11px;
+  letter-spacing: .5em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.6);
+  white-space: nowrap;
+  text-indent: .5em;
+}

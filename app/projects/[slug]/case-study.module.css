@@ -1,0 +1,222 @@
+.page { background: var(--color-bg-primary); }
+
+/* Hero */
+.hero {
+  position: relative;
+  height: 90vh;
+  min-height: 600px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.heroImage { position: absolute; inset: 0; }
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.1) 60%);
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-2xl) var(--gutter);
+  max-width: var(--container);
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.heroCategory { color: var(--color-accent); }
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 300;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-tight);
+  color: #fff;
+}
+
+.heroLocation {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+/* Brief */
+.brief {
+  border-bottom: 1px solid var(--color-border);
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--gutter);
+}
+
+.briefGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--col-gap);
+}
+
+.briefItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.briefLabel {
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+}
+
+.briefValue {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+/* Section */
+.section {
+  padding: var(--space-2xl) var(--gutter);
+  max-width: var(--container);
+  margin: 0 auto;
+}
+
+.sectionInner {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sectionLabel { color: var(--color-text-subtle); }
+
+.challengeText {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 36px);
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+}
+
+/* Image grid */
+.imageGrid {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--space-md) var(--gutter);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--col-gap);
+}
+
+.narrativeImage {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--color-bg-warm);
+}
+
+.narrativeImage.wide {
+  grid-column: span 2;
+  aspect-ratio: 16/9;
+}
+
+/* Materials */
+.materials {
+  background: var(--color-bg-warm);
+  padding: var(--space-2xl) var(--gutter);
+}
+
+.materialGrid {
+  display: flex;
+  gap: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.materialItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.materialSwatch {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+}
+
+.materialName {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* Next project */
+.nextProject {
+  position: relative;
+  display: block;
+  height: 60vh;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.nextImage { position: absolute; inset: 0; }
+.nextOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  transition: background var(--duration-mid);
+  z-index: 1;
+}
+
+.nextProject:hover .nextOverlay { background: rgba(0,0,0,0.45); }
+
+.nextProject:hover .nextImage img { transform: scale(1.05); }
+
+.nextImage img { transition: transform var(--duration-slow) var(--ease-smooth); }
+
+.nextContent {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.nextLabel { color: rgba(255,255,255,0.5); }
+
+.nextTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 300;
+  letter-spacing: var(--tracking-tight);
+  color: #fff;
+}
+
+.nextCta {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 2px;
+}

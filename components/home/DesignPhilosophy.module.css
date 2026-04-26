@@ -1,0 +1,149 @@
+/* ── Section ──────────────────────────────────────────────────────────────── */
+.section {
+  position: relative;
+  background: var(--color-bg-white);
+  color: var(--color-text-primary);
+  padding: clamp(108px, 14vw, 200px) var(--gutter);
+  overflow: hidden;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/sketches/bg-1.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.14; /* Subtle texture feel */
+  pointer-events: none;
+  z-index: 0;
+  /* Smooth start and end using masking */
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: clamp(20px, 3vw, 36px);
+}
+
+/* ── Quote wrapper ────────────────────────────────────────────────────────── */
+/*
+  Clips the vertical slide so the entering/exiting line
+  doesn't bleed outside the typographic boundary.
+  The wrapper itself fades in once on scroll entry.
+*/
+.quoteWrap {
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.quoteWrap.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Quote line ───────────────────────────────────────────────────────────── */
+/*
+  Single-line flex. The entire sentence slides as one typographic unit.
+  font-weight 300 keeps it architectural — not heavy, not weak.
+*/
+.quote {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.22em;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.5vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+  will-change: transform, opacity;
+}
+
+/* ── Static prefix ────────────────────────────────────────────────────────── */
+.staticPart {
+  white-space: nowrap;
+}
+
+/* ── Dynamic last word ────────────────────────────────────────────────────── */
+/*
+  Same typeface, slightly wider tracking to visually distinguish
+  the last word without relying on italic contrast.
+*/
+.dynamicWord {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* ── Period ───────────────────────────────────────────────────────────────── */
+.period {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* ── Attribution ──────────────────────────────────────────────────────────── */
+.attribution {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s;
+}
+
+.attribution.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.attributionName {
+  font-family: var(--font-ui);
+  font-size: clamp(10px, 1.1vw, 12px);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  opacity: 0.7;
+}
+
+.attributionRole {
+  font-family: var(--font-ui);
+  font-size: clamp(9px, 1vw, 11px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 820px) {
+  .section {
+    padding-top: 84px;
+    padding-bottom: 84px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding-top: clamp(80px, 18vw, 120px);
+    padding-bottom: clamp(80px, 18vw, 120px);
+  }
+
+  .staticPart {
+    white-space: normal;
+  }
+}

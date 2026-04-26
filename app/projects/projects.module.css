@@ -1,0 +1,178 @@
+.page {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  padding-bottom: 20vh;
+}
+
+.intro {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--gutter);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+  margin-bottom: 24px;
+}
+
+.pageTitle {
+  font-family: var(--font-display);
+  font-size: clamp(60px, 10vw, 160px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: var(--tracking-tighter);
+  max-width: 10ch;
+}
+
+.pageSubtitle {
+  margin-top: 40px;
+  max-width: 32ch;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--color-text-subtle);
+}
+
+/* Portfolio List */
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Project Chapter */
+.chapter {
+  position: relative;
+  width: 100%;
+  padding: 20vh 0;
+  overflow: hidden;
+}
+
+.chapterContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  position: relative;
+  z-index: 2;
+}
+
+.mainImageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  margin-bottom: 80px;
+  background: #f5f5f5;
+}
+
+.chapterInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 800px;
+}
+
+.chapterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 24px;
+}
+
+.projectTitle {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 6vw, 110px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: var(--tracking-tight);
+}
+
+.projectMeta {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+  display: flex;
+  gap: 24px;
+}
+
+.projectTagline {
+  font-family: var(--font-body);
+  font-size: clamp(20px, 2vw, 32px);
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  max-width: 45ch;
+  margin-top: 24px;
+}
+
+/* Image Grid within Chapter */
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--gutter);
+  margin-top: 120px;
+}
+
+.gridImage {
+  position: relative;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+/* Alternating Patterns */
+.chapter:nth-child(even) .chapterHeader {
+  flex-direction: row-reverse;
+}
+
+.chapter:nth-child(even) .chapterInfo {
+  margin-left: auto;
+  text-align: right;
+}
+
+.chapter:nth-child(even) .projectTagline {
+  margin-left: auto;
+}
+
+/* Mask Reveal Styles */
+.maskReveal {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.maskReveal.active {
+  clip-path: inset(0% 0 0 0);
+}
+
+@media (max-width: 1024px) {
+  .chapter {
+    padding: 10vh 0;
+  }
+  
+  .mainImageWrap {
+    aspect-ratio: 4/3;
+  }
+  
+  .chapterHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .chapter:nth-child(even) .chapterHeader {
+    flex-direction: column;
+  }
+  
+  .chapter:nth-child(even) .chapterInfo {
+    text-align: left;
+  }
+}
