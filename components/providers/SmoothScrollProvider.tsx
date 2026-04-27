@@ -7,11 +7,7 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-declare global {
-  interface Window {
-    lenis: Lenis | null;
-  }
-}
+
 
 export default function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
@@ -27,7 +23,7 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
     });
 
     lenisRef.current = lenis;
-    window.lenis = lenis;
+    (window as any).lenis = lenis;
 
     // Check if intro is already marked as done globally
     const isIntroDone = (window as any).introDone;
@@ -64,7 +60,7 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
       clearTimeout(safetyUnlock);
       gsap.ticker.remove(tick);
       lenis.destroy();
-      window.lenis = null;
+      (window as any).lenis = null;
     };
   }, []);
 

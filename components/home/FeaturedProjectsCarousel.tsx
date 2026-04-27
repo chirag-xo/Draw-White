@@ -68,7 +68,7 @@ export default function FeaturedProjectsCarousel() {
 
   const containerRef   = useRef<HTMLDivElement>(null);
   const cardRefs       = useRef<(HTMLDivElement | null)[]>([]);
-  const imgRefs        = useRef<(HTMLImageElement | null)[]>([]);
+  const imgRefs        = useRef<(HTMLDivElement | null)[]>([]);
   const autoPlayRef    = useRef<ReturnType<typeof setTimeout> | null>(null);
   const progressRef    = useRef<number | null>(null);
   const progressStartRef = useRef<number>(0);

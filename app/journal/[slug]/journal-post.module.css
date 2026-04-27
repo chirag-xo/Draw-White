@@ -7,12 +7,14 @@
 .hero {
   max-width: var(--container);
   margin: 0 auto;
-  padding: var(--space-3xl) var(--gutter);
+  padding: var(--space-xl) var(--gutter); /* Reduced vertical padding */
+  text-align: center; /* Center the title and content */
 }
 
 .meta {
   display: flex;
   align-items: center;
+  justify-content: center; /* Center the meta items */
   gap: var(--space-md);
   margin-bottom: var(--space-md);
   font-family: var(--font-ui);
@@ -34,7 +36,7 @@
   letter-spacing: var(--tracking-tight);
   color: var(--color-text-primary);
   max-width: 900px;
-  margin-bottom: var(--space-xl);
+  margin: 0 auto var(--space-lg); /* Centered with reduced bottom margin */
 }
 
 .heroImage {
@@ -46,10 +48,37 @@
   background: var(--color-bg-warm);
 }
 
-.container {
+.layoutWrapper {
+  display: grid;
+  grid-template-columns: 280px 1fr 100px;
+  gap: var(--space-2xl);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--gutter) var(--space-4xl);
+}
+
+.sidebarLeft {
+  position: relative;
+}
+
+.sidebarRight {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.mainContent {
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 var(--gutter) var(--space-3xl);
+}
+
+.sectionHeading {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 300;
+  line-height: 1.2;
+  margin: var(--space-2xl) 0 var(--space-lg);
+  color: var(--color-text-primary);
 }
 
 .excerpt {
@@ -69,7 +98,21 @@
 }
 
 .content p {
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.readTimeMobile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--space-2xl);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--color-text-subtle);
+}
+
+.clockIcon {
+  opacity: 0.6;
 }
 
 /* Back Link */
@@ -89,6 +132,21 @@
 
 .backLink:hover {
   opacity: 0.6;
+}
+
+@media (max-width: 1200px) {
+  .layoutWrapper {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .sidebarLeft, .sidebarRight {
+    display: none;
+  }
+  
+  .mainContent {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {

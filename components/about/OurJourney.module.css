@@ -6,23 +6,6 @@
   overflow: visible; /* Ensure sticky works */
 }
 
-.backgroundWrap {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.backgroundImage {
-  object-fit: cover;
-  opacity: 0.1; /* Very low opacity as requested */
-  filter: blur(25px); /* Diffused effect */
-  transform: scale(1.1); /* Prevent blur edges from showing */
-  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-}
-
 .stickyContent {
   display: flex;
   min-height: 100vh;
@@ -32,9 +15,9 @@
 
 .leftCol {
   width: 50%;
-  height: 100vh;
+  height: calc(100vh - var(--nav-height, 80px));
   position: sticky;
-  top: 0;
+  top: var(--nav-height, 80px);
   display: flex;
   align-items: center;
   padding-left: clamp(40px, 6vw, 80px);

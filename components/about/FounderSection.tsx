@@ -30,15 +30,6 @@ const founders = [
     quote: "A space should not just be seen; it should be felt through the soles of your feet.",
     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1200&q=85",
     signature: "/images/signature2.svg"
-  },
-  {
-    id: '03',
-    name: "Leila Desai",
-    role: "Interior Architect",
-    description: "Architect with a background in conservation. She ensures every new project understands its site before speaking. Her work often bridges the gap between historical context and modern utility.",
-    quote: "Every building has a memory. Our job is to listen to it before we start sketching.",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&q=85",
-    signature: "/images/signature3.svg"
   }
 ];
 
@@ -125,8 +116,18 @@ export default function FounderSection() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} id="founders" className={styles.founderSection}>
+    <section ref={sectionRef} id="leadership" className={styles.founderSection}>
       <div className={styles.container}>
+        <div className={styles.headingBlock}>
+          <span className={styles.sectionLabel}>Leadership</span>
+          <AnimatedHeading className={styles.sectionHeading}>
+            The Vision Behind the Studio
+          </AnimatedHeading>
+          <p className={styles.sectionDescription}>
+            Guided by a commitment to architectural honesty and the belief that the best spaces are those that feel discovered rather than designed.
+          </p>
+        </div>
+
         {founders.map((founder, index) => (
           <div 
             key={founder.id} 

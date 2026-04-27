@@ -20,23 +20,34 @@
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  opacity: 0;
+  opacity: 1;
   filter: grayscale(1) contrast(1.02) brightness(0.72);
-  transition: opacity 1.1s var(--ease-smooth);
   will-change: transform, opacity;
 }
 
-.video.ready {
-  opacity: 1;
+.imageWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
+
+.heroImage {
+  object-fit: cover;
+  filter: contrast(1.05) brightness(0.85);
+  transition: filter 1.5s ease;
+}
+
+
 
 .overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(5, 5, 5, 0.5) 0%, rgba(5, 5, 5, 0.2) 24%, rgba(5, 5, 5, 0.14) 52%, rgba(5, 5, 5, 0.62) 100%),
-    linear-gradient(90deg, rgba(5, 5, 5, 0.5) 0%, rgba(5, 5, 5, 0.08) 42%, rgba(5, 5, 5, 0.18) 100%);
+    linear-gradient(180deg, rgba(5, 5, 5, 0.3) 0%, rgba(5, 5, 5, 0.1) 24%, transparent 52%, rgba(5, 5, 5, 0.4) 100%),
+    linear-gradient(90deg, rgba(5, 5, 5, 0.3) 0%, transparent 42%, rgba(5, 5, 5, 0.1) 100%);
 }
+
 
 .content {
   position: relative;

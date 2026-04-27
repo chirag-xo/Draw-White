@@ -3,7 +3,10 @@
   position: relative;
   background: var(--color-bg-white);
   color: var(--color-text-primary);
-  padding: clamp(108px, 14vw, 200px) var(--gutter);
+  padding-top: clamp(100px, 12vw, 160px);
+  padding-bottom: clamp(60px, 8vw, 100px);
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
   overflow: hidden;
 }
 
@@ -58,11 +61,7 @@
   font-weight 300 keeps it architectural — not heavy, not weak.
 */
 .quote {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.22em;
+  display: block;
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(28px, 4.5vw, 64px);
@@ -70,7 +69,6 @@
   line-height: 1.1;
   letter-spacing: var(--tracking-tight);
   color: var(--color-text-primary);
-  will-change: transform, opacity;
 }
 
 /* ── Static prefix ────────────────────────────────────────────────────────── */
@@ -84,9 +82,15 @@
   the last word without relying on italic contrast.
 */
 .dynamicWord {
+  display: inline;
+  white-space: nowrap;
   font-family: var(--font-display);
   font-style: normal;
   font-weight: 400;
+}
+
+.period {
+  display: inline-block;
 }
 
 /* ── Period ───────────────────────────────────────────────────────────────── */

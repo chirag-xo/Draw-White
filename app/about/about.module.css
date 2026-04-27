@@ -5,25 +5,51 @@
 
 /* Manifesto Hero */
 .manifestoHero {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: var(--space-3xl) var(--gutter);
-  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  width: 100%;
+  min-height: 35vh; /* Reduced from 50vh */
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: clamp(60px, 10vw, 120px);
+  padding-bottom: clamp(20px, 4vw, 40px); /* Reduced bottom padding */
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  overflow: hidden;
+  background: var(--color-bg-white);
+}
+
+.manifestoHero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/sketches/0.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12; /* Low opacity as requested */
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+}
+
+.manifestoHero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .eyebrow { color: var(--color-text-subtle); }
 
 .manifestoTitle {
   font-family: var(--font-display);
-  font-size: clamp(36px, 5vw, 80px);
+  font-size: var(--text-display);
   font-weight: 300;
-  line-height: 1.1;
+  line-height: var(--leading-display);
   letter-spacing: var(--tracking-tight);
   color: var(--color-text-primary);
-  max-width: 18ch;
+  margin: 0 auto;
 }
 
 /* Split section */
@@ -65,7 +91,7 @@
 /* Values */
 .valuesSection {
   background: var(--color-bg-white);
-  padding: var(--space-3xl) 0;
+  padding: var(--space-3xl) 0 var(--space-lg);
 }
 
 .valuesContainer {

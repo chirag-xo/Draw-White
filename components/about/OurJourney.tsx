@@ -12,34 +12,28 @@ gsap.registerPlugin(ScrollTrigger);
 
 const journeyData = [
   {
-    year: "2010",
-    title: "Foundation",
-    story: "DRAW was founded on a single belief: that the best room is the one that asks nothing of you. We started in a small studio in Mumbai, focusing on the raw integrity of materials and the quiet power of proportions.",
-    img: "/sketches/a.png"
+    year: "2013",
+    title: "The Genesis",
+    story: "It began with two college friends, one laptop, and countless conversations over coffee at Cafe Coffee Day. What started with small renovations and family projects was driven by a much larger vision—to shape spaces that feel timeless.",
+    img: "/sketches/01.png"
   },
   {
-    year: "2014",
-    title: "Exploration",
-    story: "Our middle years were defined by a rigorous study of light and local topographies. We moved beyond simple interiors to architecture that responds to the specific climate and culture of its site.",
-    img: "/sketches/b.png"
+    year: "2015",
+    title: "The First Studio",
+    story: "The vision took form with the opening of Draw Design’s first studio in Gurgaon, led by a small team of 4. From compact renovations to boutique interiors, every project became a step toward something bigger.",
+    img: "/sketches/02.png"
   },
   {
-    year: "2018",
-    title: "Breakthrough",
-    story: "A defining period where our language of measured restraint became singular. We began coordinating every junction in detail, ensuring spatial clarity survived the construction process.",
-    img: "/sketches/c.png"
+    year: "2017",
+    title: "The Turning Point",
+    story: "Recognition followed with the studio’s first design award, marking the moment Draw Design stepped into a new league. The scale grew. So did the ambition—luxury villas, high-rise residences, and larger lifestyle spaces soon followed.",
+    img: "/sketches/03.png"
   },
   {
-    year: "2022",
-    title: "Expansion",
-    story: "Taking the intimacy of residential design to a larger scale. Our work expanded into hospitality and commercial environments that prioritize atmosphere and human habits over spectacle.",
-    img: "/sketches/d.png"
-  },
-  {
-    year: "Present",
-    title: "Ongoing Evolution",
-    story: "Today, we continue to calibrate built outcomes until they match the original intent. The methodology remains intentionally spare: less noise, more silence.",
-    img: "/sketches/e.png"
+    year: "2026",
+    title: "Still Evolving",
+    story: "Today, Draw Design is a 40+ strong team of architects and designers, crafting large-scale residences, resort-style villas, and landmark spaces. What began in a coffee shop continues to evolve, still growing, still redefining spaces, and still driven by the same passion that started it all.",
+    img: "/sketches/04.png"
   }
 ];
 
@@ -60,12 +54,15 @@ export default function OurJourney() {
     sections.forEach((section, i) => {
       ScrollTrigger.create({
         trigger: section,
-        start: "top 70%", // Trigger when item enters 70% from top
-        end: "bottom 30%", // End when item leaves 30% from top
+        start: "top center",
+        end: "bottom center",
         onEnter: () => setActiveIndex(i),
         onEnterBack: () => setActiveIndex(i),
       });
     });
+
+    // Refresh ScrollTrigger to ensure all positions are calculated correctly
+    ScrollTrigger.refresh();
 
     // Progress pill animation
     const pill = containerRef.current.querySelector(`.${styles.pill}`);
@@ -86,17 +83,6 @@ export default function OurJourney() {
 
   return (
     <section ref={containerRef} className={styles.section} id="journey">
-      {isMounted && (
-        <div className={styles.backgroundWrap}>
-          <Image
-            src="/sketches/about-1.jpeg"
-            alt=""
-            fill
-            className={styles.backgroundImage}
-            priority
-          />
-        </div>
-      )}
       <div className={styles.stickyContent}>
         <div className={styles.leftCol}>
           <div className={styles.contentWrap}>

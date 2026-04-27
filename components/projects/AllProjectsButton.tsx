@@ -26,12 +26,12 @@ function AllProjectsPanel({ originX, originY, onClose }: Props) {
 
   useEffect(() => {
     // Pause Lenis
-    if (window.lenis) window.lenis.stop();
+    if ((window as any).lenis) (window as any).lenis.stop();
     document.body.style.overflow = 'hidden';
 
     return () => {
       // Resume Lenis
-      if (window.lenis) window.lenis.start();
+      if ((window as any).lenis) (window as any).lenis.start();
       document.body.style.overflow = '';
     };
   }, []);

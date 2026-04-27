@@ -24,7 +24,7 @@ export default function SelectedWorks() {
       aria-labelledby="selected-works-heading"
       style={{
         background: '#fff',
-        padding: 'clamp(80px, 10vw, 140px) 0',
+        padding: 'clamp(60px, 8vw, 100px) 0',
         overflow: 'hidden',
       }}
     >
@@ -80,10 +80,10 @@ export default function SelectedWorks() {
           style={{
             display: 'flex',
             width: '100%',
-            maxWidth: '1400px',
+            maxWidth: '1600px',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '6px',
+            gap: '8px',
           }}
         >
           {selectedProjects.map((project, index) => (
@@ -96,16 +96,18 @@ export default function SelectedWorks() {
                 borderRadius: '16px',
                 flexShrink: 0,
                 willChange: 'width',
+                border: '1px solid rgba(0,0,0,0.05)',
               }}
-              initial={{ width: '5.5rem', height: '38rem' }}
+              initial={{ width: '4.5rem', height: '38rem' }}
               animate={{
-                width: activeImage === index ? '36rem' : '5.5rem',
+                width: activeImage === index ? '38rem' : '4.5rem',
                 height: '38rem',
               }}
-              transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+              transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
               onHoverStart={() => setActiveImage(index)}
               onClick={() => setActiveImage(index)}
             >
+
               {/* Dark gradient overlay on active */}
               <AnimatePresence>
                 {activeImage === index && (

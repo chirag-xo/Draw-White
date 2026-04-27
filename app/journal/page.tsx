@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import FeaturedPost from '@/components/Journal/FeaturedPost';
-import JournalFilters from '@/components/Journal/JournalFilters';
-import JournalGrid from '@/components/Journal/JournalGrid';
+import FeaturedPost from '@/components/journal/FeaturedPost';
+import JournalFilters from '@/components/journal/JournalFilters';
+import JournalGrid from '@/components/journal/JournalGrid';
 import { journalPosts } from '@/data/journal';
 import styles from './journal.module.css'; // We'll keep the page-level background styling here
 

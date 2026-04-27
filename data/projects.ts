@@ -1,6 +1,7 @@
 export interface Project {
   slug: string;
   title: string;
+  tagline: string;
   location: string;
   year: string;
   img: string;
@@ -16,6 +17,7 @@ export const projects: Project[] = [
   {
     slug: "ridgewood-apartment",
     title: "Ridgewood Apartment",
+    tagline: "A harmonious blend of nature-inspired design and contemporary luxury.",
     location: "Gurgaon",
     year: "2024",
     img: "/images/projects/DSC06981.jpg",
@@ -32,6 +34,7 @@ export const projects: Project[] = [
   {
     slug: "toni-&-guy",
     title: "Toni & Guy",
+    tagline: "A masterclass in restrained opulence atop Delhi's prestigious addresses.",
     location: "Faridabad",
     year: "2023",
     img: "/images/projects/DSC07329.jpg",
@@ -48,6 +51,7 @@ export const projects: Project[] = [
   {
     slug: "timeless-fitness-gym",
     title: "Timeless Fitness Gym",
+    tagline: "A coastal sanctuary where the boundaries between indoors and outdoors dissolve.",
     location: "Delhi",
     year: "2024",
     img: "/images/projects/House%206.jpg",
@@ -64,6 +68,7 @@ export const projects: Project[] = [
   {
     slug: "naraina-vihar",
     title: "Naraina Vihar",
+    tagline: "Conceived as a gallery for living, treating every surface as artistic expression.",
     location: "Gurgaon",
     year: "2023",
     img: "/images/projects/TGP03936-HDR-1.jpg",
@@ -80,6 +85,7 @@ export const projects: Project[] = [
   {
     slug: "poineer-araya-residence",
     title: "Poineer Araya Residence",
+    tagline: "A sophisticated living space anchored by emerald-green and brass accents.",
     location: "Gurgaon",
     year: "2024",
     img: "/images/projects/TONY%20_%20GUY%20AGRA%20(20).jpg",
@@ -96,6 +102,7 @@ export const projects: Project[] = [
   {
     slug: "the-artisan-bar",
     title: "The Artisan Bar & Nook",
+    tagline: "A compact yet expressive bar and lounge nook with a boutique hotel feel.",
     location: "Chandigarh",
     year: "2024",
     img: "/images/projects/DSC07091.jpg",
@@ -112,6 +119,7 @@ export const projects: Project[] = [
   {
     slug: "the-shukrana-residence",
     title: "The Shukrana Residence",
+    tagline: "Celebrating Indian craftsmanship through a contemporary luxury lens.",
     location: "New Delhi",
     year: "2023",
     img: "/images/projects/DSC07337.jpg",
@@ -125,6 +133,58 @@ export const projects: Project[] = [
       "A cascading gold chandelier draws the eye downward, anchoring the space. Rich blue upholstery, a classic buffet console, and curated wall art create layers of visual interest at human scale.",
     gallery: ["/images/projects/DSC07337.jpg", "/images/projects/House%206.jpg"],
   },
+  {
+    slug: "malani-marble-showroom",
+    title: "Malani Marble Showroom",
+    tagline: "A monumental showcase of natural stone as architectural sculpture.",
+    location: "Kishangarh",
+    year: "2023",
+    img: "/images/projects/Malani%20Marble%20(40).jpg",
+    category: "Commercial",
+    area: "12,000 sq ft",
+    description:
+      "A monumental showroom designed to showcase natural stone not just as material, but as architectural sculpture. The space uses scale and light to dramatize the inherent beauty of marble and granite.",
+    challenge:
+      "Displaying thousands of heavy stone slabs in a way that feels curated and light, rather than industrial or overwhelming.",
+    solution:
+      "We created a series of monolithic display walls and integrated dramatic overhead lighting that mimics natural daylight, allowing the stones' textures and colors to be seen in their true state.",
+    gallery: ["/images/projects/Malani%20Marble%20(40).jpg", "/images/projects/DSC06981.jpg"],
+  },
+  {
+    slug: "urban-art-gallery",
+    title: "Urban Art Gallery",
+    tagline: "A minimalist canvas where architecture recedes to empower the art.",
+    location: "New Delhi",
+    year: "2024",
+    img: "/images/projects/Copy%20of%20TGP04029-HDR-1.jpg",
+    category: "Cultural",
+    area: "5,800 sq ft",
+    description:
+      "A minimalist gallery space designed as a silent canvas. High ceilings, seamless white surfaces, and precision lighting create an environment where the architecture empowers the art without competing with it.",
+    challenge:
+      "Creating a space that is flexible enough for large-scale installations while maintaining an intimate feel for smaller works.",
+    solution:
+      "We implemented a system of modular wall panels and a programmable DALI lighting grid, allowing the gallery's layout and atmosphere to be completely transformed for each exhibition.",
+    gallery: ["/images/projects/Copy%20of%20TGP04029-HDR-1.jpg", "/images/projects/TGP03936-HDR-1.jpg"],
+  },
+  {
+    slug: "tg-studio-workspace",
+    title: "T&G Studio Workspace",
+    tagline: "A high-performance creative hub blending industrial grit with luxury finish.",
+    location: "Mumbai",
+    year: "2023",
+    img: "/images/projects/tng-1%20-%20Edited.jpg",
+    category: "Workspace",
+    area: "2,500 sq ft",
+    description:
+      "A creative hub designed for high-performance artistic work. The studio blends industrial elements like exposed ceilings with luxury finishes like fluted oak and polished brass.",
+    challenge:
+      "Balancing the technical requirements of a high-end salon workspace with the comfort and privacy of a luxury lounge.",
+    solution:
+      "We designed bespoke workstations with integrated storage and lighting, using semi-transparent partitions to maintain an open feel while providing necessary acoustic and visual privacy.",
+    gallery: ["/images/projects/tng-1%20-%20Edited.jpg", "/images/projects/TONY%20_%20GUY%20AGRA%20(20).jpg"],
+  },
 ];
 
 export const featuredProjects = projects.slice(0, 3);
+

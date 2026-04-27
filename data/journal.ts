@@ -5,6 +5,7 @@ export interface JournalPost {
   slug: string;
   title: string;
   excerpt: string;
+  content?: string;
   date: string;
   readTime: string;
   category: PostCategory;
@@ -22,6 +23,7 @@ export const journalPosts: JournalPost[] = [
     slug: 'the-economics-of-restraint',
     title: 'The Economics of Restraint',
     excerpt: 'Why removing elements from a design — not adding them — is the most expensive thing you can do.',
+    content: `## The Philosophy of Less\nDesign is often misunderstood as an additive process. We are taught that more features, more ornaments, and more materials equate to more value. However, in the world of high-end architecture, the opposite is true. The most expensive thing you can do is to leave a wall blank, but perfectly finished.\n\n## Beginning the Journey\nEvery project starts with a site and a set of constraints. But the most important constraint is the one we impose on ourselves: the constraint of restraint. When we begin a journey with a client, we often spend more time talking about what we won't do than what we will.\n\n## Our Design Approach\nOur approach is subtractive. We look at a space and ask, "What can we take away without losing the soul of the room?" This requires a level of precision that is far higher than additive design. When there is no trim to hide a joint, that joint must be perfect.\n\n## Material Selection\nRestraint doesn't mean lack of texture. On the contrary, it makes the materials you do choose speak louder. A single slab of Travertine, placed with intention, carries more narrative weight than a dozen disparate finishes.\n\n## The Role of Light\nLight is our most vital material. In a restrained space, light becomes the protagonist. It reveals the subtle textures of a lime-wash wall or the sharp edge of a concrete monolith. Without clutter, light has the freedom to move.\n\n## Achieving Perfection\nPerfection is not when there is nothing left to add, but when there is nothing left to take away. It is a state of equilibrium where every line, every shadow, and every surface serves a purpose. It is the economics of restraint.`,
     date: '12 March 2024',
     readTime: '6 min read',
     category: 'Design',

@@ -1,57 +1,46 @@
 'use client';
 
-import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import RevealStagger from '../animations/RevealStagger';
-import AnimatedHeading from '../animations/AnimatedHeading';
 import styles from './HeroSection.module.css';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const VIDEO_SRC = '/studio-home-hero.mp4';
-const POSTER_SRC =
-  'https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?w=1800&q=90';
+const IMAGES = [
+  '/images/projects/DSC06981.jpg',
+  '/images/projects/DSC07329.jpg',
+  '/images/projects/House%206.jpg',
+  '/images/projects/TGP03936-HDR-1.jpg',
+  '/images/projects/DSC07337.jpg',
+  '/images/projects/DSC07091.jpg',
+  '/images/projects/TONY%20_%20GUY%20AGRA%20(20).jpg',
+  '/images/projects/Malani%20Marble%20(40).jpg',
+  '/images/projects/Copy%20of%20TGP04029-HDR-1.jpg',
+  '/images/projects/tng-1%20-%20Edited.jpg',
+];
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [isReady, setIsReady] = useState(false);
-  const [showContent, setShowContent] = useState(false);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const attemptPlayback = () => {
-      video.play().catch(() => {});
-    };
-
-    attemptPlayback();
-    window.addEventListener('intro-complete', () => {
-      attemptPlayback();
-      setShowContent(true);
-    });
-
-    // Fallback if no intro loader
-    const timer = setTimeout(() => setShowContent(true), 1000);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('intro-complete', attemptPlayback);
-    };
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % IMAGES.length);
+    }, 7000);
+    return () => clearInterval(timer);
   }, []);
 
   useGSAP(
     () => {
-      if (!sectionRef.current || !videoRef.current) return;
+      if (!sectionRef.current) return;
 
-      const video = videoRef.current;
       const section = sectionRef.current;
 
-      gsap.to(video, {
+      gsap.to(`.${styles.imageWrapper}`, {
         yPercent: 4,
         scale: 1.02,
         ease: 'none',
@@ -69,56 +58,35 @@ export default function HeroSection() {
   return (
     <section ref={sectionRef} className={styles.hero} aria-label="DRAW studio homepage hero">
       <div className={styles.mediaLayer}>
-        <video
-          ref={videoRef}
-          className={`${styles.video} ${isReady ? styles.ready : ''}`}
-          src={VIDEO_SRC}
-          poster={POSTER_SRC}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          disablePictureInPicture
-          onLoadedData={() => setIsReady(true)}
-          onCanPlay={() => setIsReady(true)}
-        />
+        <AnimatePresence>
+          <motion.div
+            key={IMAGES[index]}
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 2.5, ease: [0.4, 0, 0.2, 1] }}
+            className={styles.imageWrapper}
+          >
+            <Image
+              src={IMAGES[index]}
+              alt={`Project Showcase ${index + 1}`}
+              fill
+              priority
+              className={styles.heroImage}
+              sizes="100vw"
+            />
+          </motion.div>
+        </AnimatePresence>
+
       </div>
 
       <div className={styles.overlay} aria-hidden="true" />
 
-      {showContent && (
-        <div className={styles.content}>
-          <RevealStagger delay={0.2}>
-            <p className={styles.kicker}>DRAW / Interior Architecture Studio</p>
-          </RevealStagger>
-          
-          <div className={styles.metaRow}>
-            <RevealStagger delay={0.4}>
-              <span>Mumbai</span>
-            </RevealStagger>
-            <AnimatedHeading 
-              elementType="span" 
-              delay={0.6}
-              threshold={0.1} // Start almost immediately
-            >
-              Spaces shaped by proportion, <span className="font-serif-accent">light, and restraint</span>
-            </AnimatedHeading>
-          </div>
-
-          <RevealStagger delay={1.2}>
-            <Link href="/projects" className={styles.cta}>
-              View Selected Works
-            </Link>
-          </RevealStagger>
-        </div>
-      )}
+      {/* Text content removed per user request */}
 
       <div className={styles.scrollCue} aria-hidden="true">
         <span className={styles.scrollLine} />
-        <span className={styles.scrollLabel}>Scroll</span>
       </div>
     </section>
   );
 }
-

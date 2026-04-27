@@ -47,7 +47,7 @@ export default function JournalPostPage({ params }: PostPageProps) {
 
       <div className={styles.heroImage}>
         <Image
-          src={post.coverImage}
+          src={post.image}
           alt={post.title}
           fill
           style={{ objectFit: 'cover' }}
@@ -56,21 +56,12 @@ export default function JournalPostPage({ params }: PostPageProps) {
         />
       </div>
 
-      <div className={styles.container}>
-        <div className={styles.excerpt}>
-          {post.excerpt}
-        </div>
-        
-        <div className={styles.content}>
-          {post.content ? (
-            post.content.split('\n\n').map((para, i) => (
-              <p key={i}>{para}</p>
-            ))
-          ) : (
-            <p>Full article coming soon.</p>
-          )}
-        </div>
-      </div>
+      <JournalPostContent 
+        content={post.content || ''} 
+        excerpt={post.excerpt} 
+      />
     </article>
   );
 }
+
+import { JournalPostContent } from '@/components/journal/JournalPostContent';

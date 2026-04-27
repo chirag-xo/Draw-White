@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import gsap from 'gsap';
 import { projects } from '@/data/projects';
 import AllProjectsButton from '@/components/projects/AllProjectsButton';
@@ -100,7 +100,7 @@ export default function ProjectsPage() {
   const project = projects[current];
 
   // Slide variants: incoming slides from direction, outgoing scales down
-  const imgVariants = {
+  const imgVariants: Variants = {
     enter: (dir: number) => ({
       y: dir > 0 ? '100%' : '-100%',
       scale: 1.08,
@@ -123,7 +123,7 @@ export default function ProjectsPage() {
     }),
   };
 
-  const textVariants = {
+  const textVariants: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,

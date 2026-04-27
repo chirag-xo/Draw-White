@@ -78,14 +78,15 @@ export default function AnimatedHeading({
     { scope: containerRef }
   );
 
+  const Comp = Component as any;
   return (
-    <Component 
-      ref={containerRef} 
+    <Comp 
+      ref={containerRef as any} 
       className={className} 
       id={id} 
       style={{ perspective: '1000px' }}
     >
       {children}
-    </Component>
+    </Comp>
   );
 }

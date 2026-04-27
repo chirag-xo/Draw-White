@@ -141,7 +141,7 @@ export default function Testimonials() {
         <div className={styles.track} ref={trackRef}>
           {combinedItems.map((item, index) => {
             if (item.type === 'image') {
-              const project = item.data;
+              const project = item.data as any; // Cast to bypass union property mismatch
               return (
                 <div key={`img-${index}`} className={`${styles.card} ${styles.imageCard}`}>
                   <Image
@@ -156,7 +156,7 @@ export default function Testimonials() {
                 </div>
               );
             } else {
-              const t = item.data;
+              const t = item.data as any; // Cast to bypass union property mismatch
               // Specific emphasis words for the marquee
               let quote = t.quote;
               if (t.id === '01') {

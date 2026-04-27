@@ -4,6 +4,7 @@ import SelectedWorks from '@/components/home/SelectedWorks';
 import ProcessTimeline from '@/components/home/ProcessTimeline';
 import FeaturedProjectsCarousel from '@/components/home/FeaturedProjectsCarousel';
 import Testimonials from '@/components/home/Testimonials';
+import Moodboard from '@/components/home/Moodboard';
 import FaqSection from '@/components/home/FaqSection';
 
 export default function HomePage() {
@@ -15,7 +16,9 @@ export default function HomePage() {
       <ProcessTimeline />
       <FeaturedProjectsCarousel />
       <Testimonials />
+      <Moodboard />
       <FaqSection />
     </>
   );
 }
+

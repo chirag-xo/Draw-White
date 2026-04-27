@@ -21,12 +21,11 @@ export default function AboutPage() {
       {/* Manifesto Hero */}
       <div className={styles.manifestoHero}>
         <RevealStagger>
-          <p className={`text-eyebrow ${styles.eyebrow}`}>Founded 2010</p>
           <AnimatedHeading
             elementType="h1"
             className={styles.manifestoTitle}
           >
-            We <span className="font-serif-accent">believe</span> the best room is the one that asks<span className="font-serif-accent"> nothing</span> of you.
+            About Us
           </AnimatedHeading>
         </RevealStagger>
       </div>

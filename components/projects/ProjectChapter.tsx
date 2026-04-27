@@ -63,7 +63,7 @@ export default function ProjectChapter({ project, index }: ProjectChapterProps) 
         <div ref={imageRef} className={styles.mainImageWrap}>
           <div ref={innerImageRef} style={{ position: 'relative', width: '100%', height: '120%', top: '-10%' }}>
             <Image
-              src={project.coverImage}
+              src={project.img}
               alt={project.title}
               fill
               style={{ objectFit: 'cover' }}
@@ -96,7 +96,7 @@ export default function ProjectChapter({ project, index }: ProjectChapterProps) 
 
         {/* Secondary Image Grid - Varied Rhythm */}
         <div className={styles.imageGrid}>
-          {project.images.slice(0, 3).map((img, i) => (
+          {project.gallery.slice(0, 3).map((img: string, i: number) => (
             <div 
               key={i} 
               className={styles.gridImage}
