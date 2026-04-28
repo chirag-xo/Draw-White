@@ -1,7 +1,5 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
 import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import RevealStagger from '@/components/animations/RevealStagger';
 import OurJourney from '@/components/about/OurJourney';
@@ -38,6 +36,9 @@ export default function AboutPage() {
           <AnimatedHeading elementType="p" className={`text-eyebrow ${styles.sectionLabel}`}>
             Core Values
           </AnimatedHeading>
+          <AnimatedHeading elementType="h2" className={styles.sectionTitle}>
+            Architectural Integrity & <span className="font-serif-accent italic">Intentionality</span>
+          </AnimatedHeading>
           <RevealStagger
             stagger={0.1}
             itemSelector={`.${styles.valueItem}`}
@@ -72,17 +73,6 @@ export default function AboutPage() {
       {/* Supporting Team */}
       <SupportingTeam />
 
-      {/* CTA */}
-      <div className={styles.ctaSection}>
-        <RevealStagger>
-          <AnimatedHeading elementType="h2" className={styles.ctaTitle}>
-            Ready to <span className="font-serif-accent">start a conversation</span>?
-          </AnimatedHeading>
-          <Link href="/contact" className={styles.ctaLink}>
-            Contact the studio →
-          </Link>
-        </RevealStagger>
-      </div>
     </div>
   );
 }

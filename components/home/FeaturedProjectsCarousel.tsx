@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { projects } from '@/data/projects';
+import { ProjectTransition, ProjectTransitionRef } from '@/components/projects/ProjectTransition';
 
 const AUTOPLAY_INTERVAL = 3500;
 const TRANSITION_DURATION = 1.2;
@@ -24,14 +25,14 @@ function getSlotConfig(
   const activeW = isMobile
     ? Math.min(containerW - 48, containerW * 0.82)
     : isTablet
-    ? 680
-    : 1060;
-  const adjW  = isMobile ? 140 : isTablet ? 320 : 460;
-  const farW  = isMobile ? 80  : isTablet ? 180 : 300;
+      ? 680
+      : 1060;
+  const adjW = isMobile ? 140 : isTablet ? 320 : 460;
+  const farW = isMobile ? 80 : isTablet ? 180 : 300;
 
   const activeH = isMobile ? 260 : isTablet ? 440 : 600;
-  const adjH   = isMobile ? 160 : isTablet ? 300 : 420;
-  const farH   = isMobile ? 100 : isTablet ? 220 : 320;
+  const adjH = isMobile ? 160 : isTablet ? 300 : 420;
+  const farH = isMobile ? 100 : isTablet ? 220 : 320;
 
   const centerX = containerW / 2;
   const gap = isMobile ? 10 : 18;
@@ -51,28 +52,38 @@ function getSlotConfig(
     default:
       return slot > 0
         ? { x: containerW + 100, y: centerY(farH), width: farW, height: farH, scale: 0.9, opacity: 0, brightness: 0.2, zIndex: 0 }
-        : { x: -farW - 100,      y: centerY(farH), width: farW, height: farH, scale: 0.9, opacity: 0, brightness: 0.2, zIndex: 0 };
+        : { x: -farW - 100, y: centerY(farH), width: farW, height: farH, scale: 0.9, opacity: 0, brightness: 0.2, zIndex: 0 };
   }
 }
 
 export default function FeaturedProjectsCarousel() {
   const TOTAL = projects.length;
-  const [current, setCurrent]               = useState(0);
+  const [current, setCurrent] = useState(0);
   const [displayCurrent, setDisplayCurrent] = useState(0);
-  const animatingRef  = useRef(false);
-  const [isMobile, setIsMobile]   = useState(false);
-  const [isTablet, setIsTablet]   = useState(false);
+  const animatingRef = useRef(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
   const [containerW, setContainerW] = useState(1200);
   const [autoPlayActive, setAutoPlayActive] = useState(true);
-  const [dotProgress, setDotProgress]       = useState(0);
+  const [dotProgress, setDotProgress] = useState(0);
 
-  const containerRef   = useRef<HTMLDivElement>(null);
-  const cardRefs       = useRef<(HTMLDivElement | null)[]>([]);
-  const imgRefs        = useRef<(HTMLDivElement | null)[]>([]);
-  const autoPlayRef    = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const progressRef    = useRef<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const transitionRef = useRef<ProjectTransitionRef>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const imgRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const autoPlayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const progressRef = useRef<number | null>(null);
   const progressStartRef = useRef<number>(0);
-  const kenBurnsRef    = useRef<gsap.core.Tween | null>(null);
+  const kenBurnsRef = useRef<gsap.core.Tween | null>(null);
+
+  const handleProjectClick = (e: React.MouseEvent, slug: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    transitionRef.current?.start(x, y, `/projects/${slug}`);
+  };
 
   // Responsive
   useEffect(() => {
@@ -157,8 +168,8 @@ export default function FeaturedProjectsCarousel() {
   );
 
   const clearTimers = useCallback(() => {
-    if (autoPlayRef.current)  { clearTimeout(autoPlayRef.current);       autoPlayRef.current  = null; }
-    if (progressRef.current)  { cancelAnimationFrame(progressRef.current); progressRef.current = null; }
+    if (autoPlayRef.current) { clearTimeout(autoPlayRef.current); autoPlayRef.current = null; }
+    if (progressRef.current) { cancelAnimationFrame(progressRef.current); progressRef.current = null; }
   }, []);
 
   const goNext = useCallback(() => animateTo(current + 1), [current, animateTo]);
@@ -192,7 +203,7 @@ export default function FeaturedProjectsCarousel() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') goNext();
-      if (e.key === 'ArrowLeft')  goPrev();
+      if (e.key === 'ArrowLeft') goPrev();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -204,12 +215,12 @@ export default function FeaturedProjectsCarousel() {
     if (!el) return;
     let startX = 0;
     const onStart = (e: TouchEvent) => { startX = e.touches[0].clientX; };
-    const onEnd   = (e: TouchEvent) => {
+    const onEnd = (e: TouchEvent) => {
       const diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) { if (diff > 0) goNext(); else goPrev(); }
     };
     el.addEventListener('touchstart', onStart, { passive: true });
-    el.addEventListener('touchend',   onEnd,   { passive: true });
+    el.addEventListener('touchend', onEnd, { passive: true });
     return () => { el.removeEventListener('touchstart', onStart); el.removeEventListener('touchend', onEnd); };
   }, [goNext, goPrev]);
 
@@ -244,41 +255,34 @@ export default function FeaturedProjectsCarousel() {
     >
       {/* Header */}
       <div style={{
+        position: 'relative',
+        padding: 'clamp(64px, 8vw, 120px) var(--gutter) clamp(32px, 4vw, 48px)',
         display: 'flex',
         alignItems: 'flex-end',
-        justifyContent: 'space-between',
-        padding: 'clamp(64px, 8vw, 120px) clamp(24px, 5vw, 80px) clamp(32px, 4vw, 48px)',
-        maxWidth: '100%',
+        justifyContent: 'space-between'
       }}>
         <div>
-          <p style={{
-            fontFamily: 'var(--font-ui)',
-            fontSize: '11px',
-            letterSpacing: '0.22em',
-            textTransform: 'uppercase',
-            color: 'rgba(0,0,0,0.35)',
-            marginBottom: '16px',
-          }}>
-            Portfolio
-          </p>
-          <div style={{ width: '42px', height: '1px', background: '#000', marginBottom: '20px' }} />
           <h2
             id="featured-projects-heading"
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(36px, 5vw, 60px)',
-              fontWeight: 300,
+              fontSize: 'clamp(36px, 5vw, 64px)',
+              fontWeight: 400,
               letterSpacing: '-0.04em',
               color: '#0D0D0D',
-              lineHeight: 1.1,
+              margin: 0,
             }}
           >
-            Featured <em style={{ fontStyle: 'italic', fontWeight: 300 }}>Projects</em>
+            Featured Projects
           </h2>
         </div>
-
         {/* Counter */}
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', paddingBottom: '6px' }}>
+        <div style={{
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: '6px',
+          paddingBottom: '6px'
+        }}>
           <span style={{
             fontFamily: 'var(--font-display)',
             fontSize: '36px',
@@ -311,7 +315,7 @@ export default function FeaturedProjectsCarousel() {
       >
         {projects.map((project, index) => {
           const slot = getSlot(index);
-          const isActive   = slot === 0;
+          const isActive = slot === 0;
           const isAdjacent = Math.abs(slot) === 1;
 
           return (
@@ -417,7 +421,10 @@ export default function FeaturedProjectsCarousel() {
                 </div>
 
                 {isActive ? (
-                  <Link href={`/projects/${project.slug}`} style={{ textDecoration: 'none', display: 'block' }} onClick={(e) => e.stopPropagation()}>
+                  <div
+                    onClick={(e) => handleProjectClick(e, project.slug)}
+                    style={{ textDecoration: 'none', display: 'block', cursor: 'pointer' }}
+                  >
                     <span style={{
                       fontFamily: 'var(--font-display)',
                       display: 'block',
@@ -430,7 +437,7 @@ export default function FeaturedProjectsCarousel() {
                     }}>
                       {project.title}
                     </span>
-                  </Link>
+                  </div>
                 ) : (
                   <span style={{
                     fontFamily: 'var(--font-display)',
@@ -503,6 +510,7 @@ export default function FeaturedProjectsCarousel() {
           Swipe to navigate
         </p>
       )}
+      <ProjectTransition ref={transitionRef} />
     </section>
   );
 }

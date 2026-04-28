@@ -17,6 +17,8 @@ interface JournalPostContentProps {
 
 export const JournalPostContent = ({ content, excerpt }: JournalPostContentProps) => {
   const [activeId, setActiveId] = useState('');
+  const [completedSections, setCompletedSections] = useState<Set<string>>(new Set());
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [headings, setHeadings] = useState<Heading[]>([]);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -44,10 +46,16 @@ export const JournalPostContent = ({ content, excerpt }: JournalPostContentProps
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setActiveId(entry.target.id);
+            // Mark as completed when we reach or pass it
+            setCompletedSections(prev => {
+              const next = new Set(prev);
+              next.add(entry.target.id);
+              return next;
+            });
           }
         });
       },
-      { rootMargin: '-10% 0px -70% 0px' } // Detect when heading is in the upper part of viewport
+      { rootMargin: '-40% 0px -55% 0px' }
     );
 
     headings.forEach((heading) => {
@@ -57,6 +65,21 @@ export const JournalPostContent = ({ content, excerpt }: JournalPostContentProps
 
     return () => observer.disconnect();
   }, [headings]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!contentRef.current) return;
+      const element = contentRef.current;
+      const rect = element.getBoundingClientRect();
+      const scrolled = window.scrollY - (element.offsetTop - 100);
+      const totalHeight = element.scrollHeight;
+      const progress = Math.max(0, Math.min(1, scrolled / totalHeight));
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const renderContent = () => {
     const parts = content.split('\n\n');
@@ -75,16 +98,14 @@ export const JournalPostContent = ({ content, excerpt }: JournalPostContentProps
   };
 
   return (
-    <div className={styles.layoutWrapper}>
+    <div className={styles.layoutWrapper} ref={contentRef}>
       <aside className={styles.sidebarLeft}>
-        <TableOfContents headings={headings} activeId={activeId} />
-        <div className={styles.readTimeMobile}>
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.clockIcon}>
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
-          <span>6 min read</span>
-        </div>
+        <TableOfContents 
+          headings={headings} 
+          activeId={activeId} 
+          completedSections={completedSections}
+          progress={scrollProgress}
+        />
       </aside>
 
       <div className={styles.mainContent}>

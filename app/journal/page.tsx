@@ -4,6 +4,8 @@ import React, { useState, useMemo } from 'react';
 import FeaturedPost from '@/components/journal/FeaturedPost';
 import JournalFilters from '@/components/journal/JournalFilters';
 import JournalGrid from '@/components/journal/JournalGrid';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
+import RevealStagger from '@/components/animations/RevealStagger';
 import { journalPosts } from '@/data/journal';
 import styles from './journal.module.css'; // We'll keep the page-level background styling here
 
@@ -35,7 +37,9 @@ export default function JournalPage() {
   return (
     <main className={styles.page}>
       {/* Step 1: Featured Section */}
-      <FeaturedPost post={featuredPost} />
+      <div className={styles.featuredSection}>
+        <FeaturedPost post={featuredPost} />
+      </div>
 
       {/* Step 2: Filters */}
       <JournalFilters 

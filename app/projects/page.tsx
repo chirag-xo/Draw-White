@@ -7,6 +7,7 @@ import { motion, AnimatePresence, Variants } from 'framer-motion';
 import gsap from 'gsap';
 import { projects } from '@/data/projects';
 import AllProjectsButton from '@/components/projects/AllProjectsButton';
+import { ProjectTransition, ProjectTransitionRef } from '@/components/projects/ProjectTransition';
 
 
 const TRANSITION_MS = 900;
@@ -18,8 +19,17 @@ export default function ProjectsPage() {
   const [direction, setDirection]       = useState<1 | -1>(1);
   const [cursorType, setCursorType]     = useState<'default' | 'prev' | 'next'>('default');
   const containerRef = useRef<HTMLDivElement>(null);
+  const transitionRef = useRef<ProjectTransitionRef>(null);
   const lockRef      = useRef(false);
   const total        = projects.length;
+
+  const handleViewProject = (e: React.MouseEvent, slug: string) => {
+    e.preventDefault();
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    transitionRef.current?.start(x, y, `/projects/${slug}`);
+  };
 
   // ── Navigate ──────────────────────────────────────────
   const goTo = useCallback(
@@ -244,8 +254,8 @@ export default function ProjectsPage() {
           </h1>
 
           {/* CTA */}
-          <Link
-            href={`/projects/${project.slug}`}
+          <button
+            onClick={(e) => handleViewProject(e, project.slug)}
             style={{
               pointerEvents: 'auto',
               display: 'inline-flex',
@@ -262,6 +272,7 @@ export default function ProjectsPage() {
               transition: 'all 0.35s ease',
               backdropFilter: 'blur(4px)',
               background: 'rgba(255,255,255,0.04)',
+              cursor: 'pointer',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = '#fff';
@@ -278,9 +289,11 @@ export default function ProjectsPage() {
             <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
               <path d="M0 4.5H11M11 4.5L7.5 1M11 4.5L7.5 8" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </Link>
+          </button>
         </motion.div>
       </AnimatePresence>
+
+      <ProjectTransition ref={transitionRef} />
 
 
 

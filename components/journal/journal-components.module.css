@@ -1,11 +1,11 @@
 .sidebarLabel {
   display: block;
   font-family: var(--font-ui);
-  font-size: 11px;
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.2em;
   color: var(--color-text-subtle);
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-md);
 }
 
 /* Table of Contents */
@@ -19,46 +19,82 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
-  padding-left: var(--space-lg);
+  gap: var(--space-sm);
+  padding-left: var(--space-md);
 }
 
-.tocLine {
+.tocLineContainer {
   position: absolute;
   left: 0;
-  top: 4px;
-  bottom: 4px;
-  width: 1px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+}
+
+.tocLineBase {
+  position: absolute;
+  inset: 0;
   background: var(--color-border);
+  opacity: 0.3;
+}
+
+.tocLineProgress {
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform-origin: top;
 }
 
 .tocItem {
   font-family: var(--font-body);
-  font-size: 15px;
-  color: var(--color-text-muted);
+  font-size: 14px;
+  color: var(--color-text-primary);
   text-decoration: none;
-  transition: all var(--duration-fast);
+  transition: color var(--duration-fast);
   line-height: 1.4;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .tocItem:hover {
   color: var(--color-text-primary);
 }
 
+.tocText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.tocCheck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
 .tocItemActive {
-  color: var(--color-text-primary);
+  color: var(--color-accent);
   font-weight: 500;
 }
 
-.tocItemActive::before {
-  content: "";
-  position: absolute;
-  left: -20px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--color-text-primary);
+.tocFooter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-ui);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-subtle);
 }
 
 /* Social Share */

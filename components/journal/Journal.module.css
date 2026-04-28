@@ -4,9 +4,31 @@
   padding-bottom: 120px;
 }
 
+.journalHeader {
+  padding: 120px 4% 40px;
+  max-width: var(--container);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.journalEyebrow {
+  color: var(--color-accent);
+  margin-bottom: var(--space-xs);
+}
+
+.journalTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 100 !important;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+  margin: 0 auto;
+}
+
 /* Featured Section */
 .featuredSection {
-  padding: 40px 4% 80px;
+  padding: 0 4% 80px;
 }
 
 .featuredHero {
@@ -24,7 +46,8 @@
 .parallaxWrapper {
   position: absolute;
   inset: 0;
-  height: 120%; /* Extra height for parallax */
+  height: 120%;
+  /* Extra height for parallax */
   top: -10%;
 }
 
@@ -109,7 +132,7 @@
 
 .blogTitle {
   font-size: 32px;
-  font-weight: 500;
+  font-weight: 400 !important;
   margin-bottom: 8px;
 }
 
@@ -307,24 +330,29 @@
   .featuredHero {
     height: 70vh;
   }
+
   .featuredContent {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .featuredAuthor {
     align-items: flex-start;
     text-align: left;
     margin-top: 20px;
   }
+
   .grid {
     grid-template-columns: 1fr;
     gap: 50px;
   }
+
   .filterControls {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
   }
+
   .filterGroup {
     flex-wrap: wrap;
   }

@@ -1,5 +1,5 @@
 .teamSection {
-  padding: var(--space-3xl) 0;
+  padding: 40px 0 var(--space-3xl);
   background-color: var(--color-bg-white);
 }
 

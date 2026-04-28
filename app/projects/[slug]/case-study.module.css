@@ -131,16 +131,56 @@
   aspect-ratio: 16/9;
 }
 
+/* Back Button */
+.backButton {
+  position: fixed;
+  top: 100px;
+  left: var(--gutter);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  mix-blend-mode: difference;
+  transition: opacity 0.3s ease;
+}
+
+.backButton:hover {
+  opacity: 0.7;
+}
+
+.descriptionText {
+  font-family: var(--font-body);
+  font-size: var(--text-lead);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin-top: -12px;
+}
+
 /* Materials */
 .materials {
   background: var(--color-bg-warm);
-  padding: var(--space-2xl) var(--gutter);
+  padding: var(--space-2xl) 0;
+  margin: var(--space-xl) 0;
+}
+
+.materials .sectionInner {
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
 }
 
 .materialGrid {
   display: flex;
+  justify-content: center;
   gap: var(--space-xl);
   flex-wrap: wrap;
+  margin-top: var(--space-md);
+  width: 100%;
 }
 
 .materialItem {
@@ -151,18 +191,41 @@
 }
 
 .materialSwatch {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   border: 1px solid var(--color-border);
+  transition: transform 0.4s var(--ease-smooth);
+}
+
+.materialItem:hover .materialSwatch {
+  transform: scale(1.1);
 }
 
 .materialName {
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   color: var(--color-text-muted);
+  text-transform: uppercase;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .backButton {
+    top: 90px;
+    left: 20px;
+  }
+  .briefGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  .imageGrid {
+    grid-template-columns: 1fr;
+  }
+  .narrativeImage.wide {
+    grid-column: span 1;
+  }
 }
 
 /* Next project */

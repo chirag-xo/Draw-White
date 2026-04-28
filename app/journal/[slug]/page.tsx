@@ -60,6 +60,9 @@ export default function JournalPostPage({ params }: PostPageProps) {
         content={post.content || ''} 
         excerpt={post.excerpt} 
       />
+
+      {/* Spacing for footer transition */}
+      <div className={styles.footerSpacer} />
     </article>
   );
 }

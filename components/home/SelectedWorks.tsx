@@ -1,10 +1,11 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { projects } from '@/data/projects';
+import { ProjectTransition, ProjectTransitionRef } from '@/components/projects/ProjectTransition';
 
 const selectedProjects = projects.map((p) => ({
   src: p.img,
@@ -18,6 +19,15 @@ const selectedProjects = projects.map((p) => ({
 
 export default function SelectedWorks() {
   const [activeImage, setActiveImage] = useState<number>(0);
+  const transitionRef = useRef<ProjectTransitionRef>(null);
+
+  const handleProjectClick = (e: React.MouseEvent, slug: string) => {
+    e.preventDefault();
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    transitionRef.current?.start(x, y, `/projects/${slug}`);
+  };
 
   return (
     <section
@@ -172,8 +182,8 @@ export default function SelectedWorks() {
                     >
                       {project.title}
                     </h3>
-                    <Link
-                      href={`/projects/${project.slug}`}
+                    <div
+                      onClick={(e) => handleProjectClick(e, project.slug)}
                       style={{
                         display: 'inline-flex',
                         alignItems: 'center',
@@ -187,13 +197,14 @@ export default function SelectedWorks() {
                         borderBottom: '1px solid rgba(255,255,255,0.3)',
                         paddingBottom: '2px',
                         transition: 'color 0.3s, border-color 0.3s',
+                        cursor: 'pointer',
                       }}
                     >
                       View Project
                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                         <path d="M1 9L9 1M9 1H1M9 1V9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
-                    </Link>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -258,6 +269,7 @@ export default function SelectedWorks() {
           </svg>
         </Link>
       </div>
+      <ProjectTransition ref={transitionRef} />
     </section>
   );
 }

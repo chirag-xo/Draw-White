@@ -1,55 +1,66 @@
 .page {
   background: var(--color-bg-white);
-  padding-top: 100px;
 }
 
 /* Manifesto Hero */
 .manifestoHero {
   position: relative;
   width: 100%;
-  min-height: 35vh; /* Reduced from 50vh */
+  height: 75vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding-top: clamp(60px, 10vw, 120px);
-  padding-bottom: clamp(20px, 4vw, 40px); /* Reduced bottom padding */
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
+  padding: var(--space-2xl) var(--gutter) var(--space-sm);
   overflow: hidden;
-  background: var(--color-bg-white);
+  background: #FFFFFF;
+  
+  /* Smooth ending */
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 }
 
 .manifestoHero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url('/sketches/0.png');
+  background-image: url('/sketches/p2.png');
   background-size: cover;
   background-position: center;
-  opacity: 0.12; /* Low opacity as requested */
+  opacity: 0.15;
   pointer-events: none;
   z-index: 0;
-  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
 }
 
 .manifestoHero > * {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  transform: translateY(-10%);
 }
-
-.eyebrow { color: var(--color-text-subtle); }
 
 .manifestoTitle {
   font-family: var(--font-display);
-  font-size: var(--text-display);
-  font-weight: 300;
-  line-height: var(--leading-display);
+  font-size: clamp(48px, 8vw, 120px);
+  font-weight: 400;
+  line-height: 1;
   letter-spacing: var(--tracking-tight);
-  color: var(--color-text-primary);
-  margin: 0 auto;
+  color: #0A0A0A;
+  margin: 0;
+}
+
+.manifestoEyebrow {
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
+}
+
+.manifestoSubtext {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 12px;
 }
 
 /* Split section */
@@ -91,7 +102,7 @@
 /* Values */
 .valuesSection {
   background: var(--color-bg-white);
-  padding: var(--space-3xl) 0 var(--space-lg);
+  padding: var(--space-xl) 0 var(--space-lg);
 }
 
 .valuesContainer {
@@ -100,7 +111,17 @@
   padding: 0 var(--gutter);
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: var(--space-md);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+  max-width: 800px;
 }
 
 .valuesGrid {

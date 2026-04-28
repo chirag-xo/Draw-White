@@ -3,6 +3,8 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
+import RevealStagger from '@/components/animations/RevealStagger';
 import styles from './media.module.css';
 
 const featuredPress = [
@@ -87,13 +89,17 @@ export default function MediaPage() {
     <div className={styles.page}>
       {/* Header */}
       <div className={styles.pageHeader}>
-        <p className={`text-eyebrow ${styles.eyebrow}`}>Accolades & Features</p>
-        <h1 className={styles.pageTitle}>
-          Selected <span className="font-serif-accent">Recognition</span>
-        </h1>
-        <p className={styles.pageSubtitle}>
-          A curated record of our studio's journey through global publications and design awards.
-        </p>
+        <RevealStagger>
+          <AnimatedHeading elementType="p" className={`text-eyebrow ${styles.eyebrow}`}>
+            Accolades & Features
+          </AnimatedHeading>
+          <AnimatedHeading elementType="h1" className={styles.pageTitle}>
+            Selected <span className="font-serif-accent italic">Recognition</span>
+          </AnimatedHeading>
+          <p className={styles.pageSubtitle}>
+            A curated record of our studio's journey through global publications and design awards.
+          </p>
+        </RevealStagger>
       </div>
 
       {/* Featured Press Grid */}
@@ -125,7 +131,14 @@ export default function MediaPage() {
 
       {/* Media Mentions List */}
       <div className={styles.mentionsSection}>
-        <h2 className={styles.sectionTitle}>Selected Mentions</h2>
+        <RevealStagger>
+          <AnimatedHeading elementType="p" className={`text-eyebrow ${styles.sectionLabel}`}>
+            Selected Mentions
+          </AnimatedHeading>
+          <AnimatedHeading elementType="h2" className={styles.editorialHeading}>
+            A Discourse on <span className="font-serif-accent">Design</span> & Detail
+          </AnimatedHeading>
+        </RevealStagger>
         <div 
           ref={containerRef}
           className={styles.mentionsList}

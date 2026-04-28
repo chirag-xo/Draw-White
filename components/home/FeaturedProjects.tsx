@@ -3,11 +3,21 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { featuredProjects } from '@/data/projects';
+import { ProjectTransition, ProjectTransitionRef } from '@/components/projects/ProjectTransition';
 import styles from './FeaturedProjects.module.css';
 
 export default function FeaturedProjects() {
   const sectionRef = useRef<HTMLElement>(null);
+  const transitionRef = useRef<ProjectTransitionRef>(null);
   const [visible, setVisible] = useState(false);
+
+  const handleProjectClick = (e: React.MouseEvent, slug: string) => {
+    e.preventDefault();
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    transitionRef.current?.start(x, y, `/projects/${slug}`);
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,10 +45,10 @@ export default function FeaturedProjects() {
       {/* Bento Grid */}
       <div className={styles.grid}>
         {/* Large featured card */}
-        <Link
-          href={`/projects/${featuredProjects[0].slug}`}
+        <div
+          onClick={(e) => handleProjectClick(e, featuredProjects[0].slug)}
           className={`${styles.cardLarge} ${visible ? styles.cardVisible : ''}`}
-          style={{ '--delay': '0ms' } as React.CSSProperties}
+          style={{ '--delay': '0ms', cursor: 'pointer' } as React.CSSProperties}
         >
           <div className={styles.imageWrap}>
             <Image
@@ -61,16 +71,16 @@ export default function FeaturedProjects() {
             </div>
           </div>
           <span className={styles.cardNumber}>01</span>
-        </Link>
+        </div>
 
         {/* Stacked smaller cards */}
         <div className={styles.stackCol}>
           {featuredProjects.slice(1, 3).map((project, i) => (
-            <Link
+            <div
               key={project.slug}
-              href={`/projects/${project.slug}`}
+              onClick={(e) => handleProjectClick(e, project.slug)}
               className={`${styles.cardSmall} ${visible ? styles.cardVisible : ''}`}
-              style={{ '--delay': `${(i + 1) * 120}ms` } as React.CSSProperties}
+              style={{ '--delay': `${(i + 1) * 120}ms`, cursor: 'pointer' } as React.CSSProperties}
             >
               <div className={styles.imageWrap}>
                 <Image
@@ -92,10 +102,11 @@ export default function FeaturedProjects() {
                 </div>
               </div>
               <span className={styles.cardNumber}>0{i + 2}</span>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
+      <ProjectTransition ref={transitionRef} />
     </section>
   );
 }
