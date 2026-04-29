@@ -265,10 +265,16 @@ button {
 .reveal-delay-5 { transition-delay: calc(var(--stagger-step) * 5); }
 
 /* ── SCROLLBAR ──────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--color-bg-primary); }
-::-webkit-scrollbar-thumb { background: rgba(10,10,10,0.2); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(10,10,10,0.4); }
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 
 /* ── UTILITIES ──────────────────────────────────────────────── */
 .scrollbar-none {

@@ -159,7 +159,7 @@ export const supportingTeam: SupportingMember[] = [
     name: 'Alia Bhatt',
     role: 'Junior Designer',
     tagline: 'Learning the language of DRAW through form.',
-    image: 'https://images.unsplash.com/photo-1544717297-fa15739a5447?w=500&q=80'
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80'
   },
   {
     id: 's23',

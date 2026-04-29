@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence, motion } from "framer-motion";
+import RevealStagger from "../animations/RevealStagger";
 import styles from "./ContactApp.module.css";
 
 const areaRanges = ["250-400", "400-600", "600-1000", "1000-5000", "5000+"];
@@ -122,10 +123,9 @@ export default function ContactApp() {
 
   return (
     <section id="contact" ref={sectionRef} className={styles.host}>
-      <div className={styles.container}>
-
-        {/* Header Block exactly as requested */}
-        <div className={styles.header}>
+      {/* Header Block — Full Width Sketch Background */}
+      <div className={styles.header}>
+        <RevealStagger>
           <div className={styles.eyebrowWrap}>
             <p className="text-eyebrow" style={{ color: "var(--color-text-muted)" }}>GET IN TOUCH</p>
             <div className={styles.eyebrowLine} />
@@ -136,8 +136,10 @@ export default function ContactApp() {
           <p className={styles.subtitle}>
             Tell us about your project and we'll get back within 24 hours.
           </p>
-        </div>
+        </RevealStagger>
+      </div>
 
+      <div className={styles.container}>
         <div className={styles.grid}>
 
           {/* Form column */}

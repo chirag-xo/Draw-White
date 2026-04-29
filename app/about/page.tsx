@@ -7,6 +7,8 @@ import SupportingTeam from '@/components/about/SupportingTeam';
 import FounderSection from '@/components/about/FounderSection';
 import LottiePlayer from '@/components/about/LottiePlayer';
 import styles from './about.module.css';
+import ImpactSection from '@/components/about/ImpactSection';
+
 
 import clarityData from '@/public/animations/clarity.json';
 import CubeData from '@/public/animations/Cube.json';
@@ -29,6 +31,11 @@ export default function AboutPage() {
       </div>
 
       <OurJourney />
+
+      <ImpactSection />
+
+
+
 
       {/* Values */}
       <div className={styles.valuesSection}>

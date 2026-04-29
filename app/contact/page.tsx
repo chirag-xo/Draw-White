@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main style={{ paddingTop: '80px', minHeight: '100vh' }}>
+    <main style={{ minHeight: '100vh' }}>
       <ContactApp />
     </main>
   );
