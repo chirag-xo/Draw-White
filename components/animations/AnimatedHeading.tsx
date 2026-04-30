@@ -12,6 +12,7 @@ interface Props {
   id?: string;
   delay?: number;
   threshold?: number;
+  style?: React.CSSProperties;
 }
 
 export default function AnimatedHeading({ 
@@ -20,7 +21,8 @@ export default function AnimatedHeading({
   elementType: Component = 'h2', 
   id, 
   delay = 0,
-  threshold = 0.9
+  threshold = 0.9,
+  style
 }: Props) {
   const containerRef = useRef<HTMLElement>(null);
 
@@ -84,7 +86,7 @@ export default function AnimatedHeading({
       ref={containerRef as any} 
       className={className} 
       id={id} 
-      style={{ perspective: '1000px' }}
+      style={{ perspective: '1000px', ...style }}
     >
       {children}
     </Comp>

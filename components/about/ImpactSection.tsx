@@ -160,7 +160,9 @@ export default function ImpactSection() {
                   suffix={stat.suffix}
                   isActive={isActive}
                 />
-                <h3 className={styles.title}>{stat.title}</h3>
+                <AnimatedHeading elementType="h3" className={styles.title}>
+                  {stat.title}
+                </AnimatedHeading>
                 <p className={styles.description}>{stat.description}</p>
               </div>
             </article>

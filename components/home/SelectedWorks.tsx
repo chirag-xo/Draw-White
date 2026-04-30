@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import { projects } from '@/data/projects';
 import { ProjectTransition, ProjectTransitionRef } from '@/components/projects/ProjectTransition';
 
@@ -58,7 +59,8 @@ export default function SelectedWorks() {
         >
           Portfolio
         </p>
-        <h2
+        <AnimatedHeading
+          elementType="h2"
           id="selected-works-heading"
           style={{
             fontFamily: 'var(--font-display)',
@@ -70,7 +72,7 @@ export default function SelectedWorks() {
           }}
         >
           Selected Works
-        </h2>
+        </AnimatedHeading>
       </div>
 
       {/* Hover-Expand Gallery */}
@@ -166,7 +168,8 @@ export default function SelectedWorks() {
                     >
                       {project.category} — {project.year}
                     </p>
-                    <h3
+                    <AnimatedHeading
+                      elementType="h3"
                       style={{
                         fontFamily: 'var(--font-display)',
                         fontSize: 'clamp(18px, 2vw, 24px)',
@@ -181,7 +184,7 @@ export default function SelectedWorks() {
                       }}
                     >
                       {project.title}
-                    </h3>
+                    </AnimatedHeading>
                     <div
                       onClick={(e) => handleProjectClick(e, project.slug)}
                       style={{

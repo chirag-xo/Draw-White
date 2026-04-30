@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import { JournalPost } from '@/data/journal';
 import styles from './Journal.module.css';
 
@@ -50,7 +51,9 @@ const JournalCard: React.FC<JournalCardProps> = ({ post }) => {
             <span>{post.readTime}</span>
           </div>
           
-          <h3 className={styles.cardTitle}>{post.title}</h3>
+          <AnimatedHeading elementType="h3" className={styles.cardTitle}>
+            {post.title}
+          </AnimatedHeading>
           
           <div className={styles.cardFooter}>
             <motion.div 

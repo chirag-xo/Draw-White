@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { AnimatePresence, motion } from "framer-motion";
+import AnimatedHeading from "../animations/AnimatedHeading";
 import RevealStagger from "../animations/RevealStagger";
 import styles from "./ContactApp.module.css";
 
@@ -130,9 +131,9 @@ export default function ContactApp() {
             <p className="text-eyebrow" style={{ color: "var(--color-text-muted)" }}>GET IN TOUCH</p>
             <div className={styles.eyebrowLine} />
           </div>
-          <h1 className={styles.title}>
+          <AnimatedHeading elementType="h1" className={styles.title}>
             Start Your Design Journey
-          </h1>
+          </AnimatedHeading>
           <p className={styles.subtitle}>
             Tell us about your project and we'll get back within 24 hours.
           </p>

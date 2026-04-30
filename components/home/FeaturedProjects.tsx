@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import { featuredProjects } from '@/data/projects';
 import { ProjectTransition, ProjectTransitionRef } from '@/components/projects/ProjectTransition';
 import styles from './FeaturedProjects.module.css';
@@ -34,7 +35,9 @@ export default function FeaturedProjects() {
       <div className={`${styles.header} ${visible ? styles.visible : ''}`}>
         <div>
           <p className={`text-eyebrow ${styles.eyebrow}`}>Selected Work</p>
-          <h2 className={styles.title}>Our Projects</h2>
+          <AnimatedHeading elementType="h2" className={styles.title}>
+            Our Projects
+          </AnimatedHeading>
         </div>
         <Link href="/projects" className={styles.viewAll}>
           View all work
@@ -65,7 +68,9 @@ export default function FeaturedProjects() {
               <span className={styles.category}>{featuredProjects[0].category}</span>
             </div>
             <div className={styles.cardBottom}>
-              <h3 className={styles.cardTitle}>{featuredProjects[0].title}</h3>
+              <AnimatedHeading elementType="h3" className={styles.cardTitle}>
+                {featuredProjects[0].title}
+              </AnimatedHeading>
               <p className={styles.cardTagline}>{featuredProjects[0].description}</p>
               <span className={styles.cardCta}>View Project →</span>
             </div>
@@ -97,7 +102,9 @@ export default function FeaturedProjects() {
                   <span className={styles.category}>{project.category}</span>
                 </div>
                 <div className={styles.cardBottom}>
-                  <h3 className={styles.cardTitle}>{project.title}</h3>
+                  <AnimatedHeading elementType="h3" className={styles.cardTitle}>
+                    {project.title}
+                  </AnimatedHeading>
                   <span className={styles.cardCta}>View Project →</span>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import styles from './StudioStory.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -126,10 +127,10 @@ export default function StudioStory() {
           <p className={`text-eyebrow ${styles.eyebrow}`}>
             Our Studio
           </p>
-          <h2 className={styles.title}>
+          <AnimatedHeading elementType="h2" className={styles.title}>
             Architecture Rooted in<br />
             <span className="font-serif-accent">Intention</span>
-          </h2>
+          </AnimatedHeading>
           <div className={styles.body}>
             <p>
               DRAW was founded on a single belief: that the best room you can design is the one that asks nothing of you. No performance. No explanation. Just proportions that feel inevitable and materials that age with grace.

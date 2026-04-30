@@ -4,6 +4,7 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import { projects } from '@/data/projects';
 import { ProjectTransition, ProjectTransitionRef } from '@/components/projects/ProjectTransition';
 
@@ -262,7 +263,8 @@ export default function FeaturedProjectsCarousel() {
         justifyContent: 'space-between'
       }}>
         <div>
-          <h2
+          <AnimatedHeading
+            elementType="h2"
             id="featured-projects-heading"
             style={{
               fontFamily: 'var(--font-display)',
@@ -274,7 +276,7 @@ export default function FeaturedProjectsCarousel() {
             }}
           >
             Featured Projects
-          </h2>
+          </AnimatedHeading>
         </div>
         {/* Counter */}
         <div style={{

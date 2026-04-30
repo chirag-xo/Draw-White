@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import styles from './Journal.module.css';
 
 interface JournalFiltersProps {
@@ -22,7 +23,9 @@ const JournalFilters: React.FC<JournalFiltersProps> = ({
   return (
     <section className={styles.filtersSection}>
       <div className={styles.blogHeader}>
-        <h2 className={styles.blogTitle}>Journal</h2>
+        <AnimatedHeading elementType="h2" className={styles.blogTitle}>
+          Journal
+        </AnimatedHeading>
       </div>
       
       <div className={styles.filterControls}>

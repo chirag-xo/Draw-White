@@ -1,0 +1,67 @@
+/*!********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[7].use[3]!./app/not-found.module.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************/
+.not-found_page__jb5cW {
+  background: var(--color-bg-dark);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--gutter);
+}
+
+.not-found_inner__oPGqn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  max-width: 640px;
+}
+
+.not-found_code__7e29u {
+  font-family: var(--font-display);
+  font-size: clamp(100px, 15vw, 240px);
+  font-weight: 300;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: rgba(242,242,242,0.06);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.not-found_title__Vh7BH {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-on-dark);
+  font-style: italic;
+}
+
+.not-found_body__sLyFD {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: var(--leading-body);
+  color: rgba(242,242,242,0.4);
+  max-width: 44ch;
+}
+
+.not-found_back__N9yjR {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  border-bottom: 1px solid rgba(128,128,128,0.3);
+  padding-bottom: 3px;
+  align-self: flex-start;
+  transition: border-color var(--duration-fast), opacity var(--duration-fast);
+}
+
+.not-found_back__N9yjR:hover {
+  opacity: 0.7;
+  border-color: rgba(128,128,128,0.7);
+}
+

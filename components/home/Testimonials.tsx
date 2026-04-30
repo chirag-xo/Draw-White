@@ -6,6 +6,7 @@ import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { testimonials } from '@/data/testimonials';
 import { featuredProjects } from '@/data/projects';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import styles from './Testimonials.module.css';
 
 // Horizontal loop helper for GSAP
@@ -132,9 +133,9 @@ export default function Testimonials() {
     <section className={styles.section} aria-labelledby="testimonials-heading">
       <div className={styles.header}>
         <p className={styles.eyebrow}>Testimonials</p>
-        <h2 id="testimonials-heading" className={styles.title}>
+        <AnimatedHeading elementType="h2" id="testimonials-heading" className={styles.title}>
           What Our Clients Say
-        </h2>
+        </AnimatedHeading>
       </div>
 
       <div className={styles.marqueeContainer} ref={containerRef}>

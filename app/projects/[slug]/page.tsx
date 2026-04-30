@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import { projects } from '@/data/projects';
 import { ProjectTransition, ProjectTransitionRef } from '@/components/projects/ProjectTransition';
 import styles from './case-study.module.css';
@@ -58,7 +59,9 @@ export default function ProjectCaseStudy({ params }: Props) {
           className={styles.heroContent}
         >
           <p className={`text-eyebrow ${styles.heroCategory}`}>{project.category}</p>
-          <h1 className={styles.heroTitle}>{project.title}</h1>
+          <AnimatedHeading elementType="h1" className={styles.heroTitle}>
+            {project.title}
+          </AnimatedHeading>
           <p className={styles.heroLocation}>{project.location} · {project.year}</p>
         </motion.div>
       </div>
@@ -92,7 +95,9 @@ export default function ProjectCaseStudy({ params }: Props) {
       <div className={styles.section}>
         <div className={styles.sectionInner}>
           <p className={`text-eyebrow ${styles.sectionLabel}`}>The Brief</p>
-          <h2 className={styles.challengeText}>{project.challenge}</h2>
+          <AnimatedHeading elementType="h2" className={styles.challengeText}>
+            {project.challenge}
+          </AnimatedHeading>
           <p className={styles.descriptionText}>{project.description}</p>
         </div>
       </div>
@@ -123,7 +128,9 @@ export default function ProjectCaseStudy({ params }: Props) {
       <div className={styles.section}>
         <div className={styles.sectionInner}>
           <p className={`text-eyebrow ${styles.sectionLabel}`}>The Solution</p>
-          <h2 className={styles.challengeText}>{project.solution}</h2>
+          <AnimatedHeading elementType="h2" className={styles.challengeText}>
+            {project.solution}
+          </AnimatedHeading>
         </div>
       </div>
 
@@ -160,7 +167,9 @@ export default function ProjectCaseStudy({ params }: Props) {
         </div>
         <div className={styles.nextContent}>
           <p className={`text-eyebrow ${styles.nextLabel}`}>Next Project</p>
-          <h2 className={styles.nextTitle}>{nextProject.title}</h2>
+          <AnimatedHeading elementType="h2" className={styles.nextTitle}>
+            {nextProject.title}
+          </AnimatedHeading>
           <span className={styles.nextCta}>View Project →</span>
         </div>
       </div>

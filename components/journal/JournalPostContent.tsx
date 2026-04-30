@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { TableOfContents } from './TableOfContents';
 import { SocialShare } from './SocialShare';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import styles from '../../app/journal/[slug]/journal-post.module.css';
 
 interface Heading {
@@ -88,9 +89,9 @@ export const JournalPostContent = ({ content, excerpt }: JournalPostContentProps
         const text = part.replace('## ', '');
         const id = text.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, '-');
         return (
-          <h2 key={i} id={id} className={styles.sectionHeading}>
+          <AnimatedHeading key={i} elementType="h2" id={id} className={styles.sectionHeading}>
             {text}
-          </h2>
+          </AnimatedHeading>
         );
       }
       return <p key={i}>{part}</p>;

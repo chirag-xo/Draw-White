@@ -66,7 +66,9 @@ export default function ProcessTimeline() {
             {phases.map((phase, i) => (
               <div key={phase.number} className={styles.processCard}>
                 <span className={styles.stepNumber}>{phase.number}</span>
-                <h3 className={styles.stepTitle}>{phase.title}</h3>
+                <AnimatedHeading elementType="h3" className={styles.stepTitle}>
+                  {phase.title}
+                </AnimatedHeading>
                 <p className={styles.stepDescription}>{phase.description}</p>
               </div>
             ))}

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import gsap from 'gsap';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import { projects } from '@/data/projects';
 import AllProjectsButton from '@/components/projects/AllProjectsButton';
 import { ProjectTransition, ProjectTransitionRef } from '@/components/projects/ProjectTransition';
@@ -239,7 +240,8 @@ export default function ProjectsPage() {
           }}
         >
           {/* Project title — compact heading */}
-          <h1
+          <AnimatedHeading
+            elementType="h1"
             style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(22px, 2.5vw, 32px)',
@@ -251,7 +253,7 @@ export default function ProjectsPage() {
             }}
           >
             {project.title}
-          </h1>
+          </AnimatedHeading>
 
           {/* CTA */}
           <button

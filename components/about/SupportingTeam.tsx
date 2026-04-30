@@ -62,7 +62,9 @@ export default function SupportingTeam() {
               />
               <div className={styles.overlay}>
                 <div className={styles.overlayContent}>
-                  <h3 className={styles.name}>{member.name}</h3>
+                  <AnimatedHeading elementType="h3" className={styles.name}>
+                    {member.name}
+                  </AnimatedHeading>
                   <span className={styles.role}>{member.role}</span>
                 </div>
               </div>

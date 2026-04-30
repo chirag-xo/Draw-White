@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import { journalPosts } from '@/data/journal';
 import styles from './journal-post.module.css';
 
@@ -25,6 +26,12 @@ export default function JournalPostPage({ params }: PostPageProps) {
     notFound();
   }
 
+  const titleWords = post.title.split(' ');
+  const accentIndex = Math.floor(titleWords.length / 2);
+  const beforeAccent = titleWords.slice(0, accentIndex).join(' ');
+  const accentWord = titleWords[accentIndex];
+  const afterAccent = titleWords.slice(accentIndex + 1).join(' ');
+
   return (
     <article className={styles.article}>
       <header className={styles.hero}>
@@ -38,11 +45,13 @@ export default function JournalPostPage({ params }: PostPageProps) {
           <span>{post.date}</span>
         </div>
         
-        <h1 className={styles.title}>
-          {post.title.split(' ').map((word, i, arr) => (
-            i === Math.floor(arr.length / 2) ? <span key={i} className="font-serif-accent">{word} </span> : word + ' '
-          ))}
-        </h1>
+        <AnimatedHeading elementType="h1" className={styles.title}>
+          <>
+            {beforeAccent && <>{beforeAccent}{' '}</>}
+            <span className="font-serif-accent">{accentWord}</span>
+            {afterAccent && <>{' '}{afterAccent}</>}
+          </>
+        </AnimatedHeading>
       </header>
 
       <div className={styles.heroImage}>

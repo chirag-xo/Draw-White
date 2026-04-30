@@ -3,6 +3,7 @@
 import { motion, MotionValue, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import styles from './Moodboard.module.css';
 
 const images = [
@@ -56,7 +57,9 @@ export default function Moodboard() {
           <span className={styles.scrollCue}>
             The Creative Process
           </span>
-          <h2 className={styles.title}>Moodboard & Materiality</h2>
+          <AnimatedHeading elementType="h2" className={styles.title}>
+            Moodboard & Materiality
+          </AnimatedHeading>
         </div>
       </div>
 

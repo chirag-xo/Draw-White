@@ -118,7 +118,9 @@ export default function MediaPage() {
             </div>
             <div className={styles.pressInfo}>
               <div className={styles.pressTag}>Featured</div>
-              <h3 className={styles.pressTitle}>{item.title}</h3>
+              <AnimatedHeading elementType="h3" className={styles.pressTitle}>
+                {item.title}
+              </AnimatedHeading>
               <div className={styles.pressMeta}>
                 <span className={styles.pressSource}>{item.source}</span>
                 <span className={styles.pressSeparator}>—</span>

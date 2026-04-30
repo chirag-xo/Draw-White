@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import styles from './SignatureShowcase.module.css';
 
 export default function SignatureShowcase() {
@@ -44,7 +45,9 @@ export default function SignatureShowcase() {
       {/* Text overlay */}
       <div className={`${styles.content} ${visible ? styles.visible : ''}`}>
         <p className={`text-eyebrow ${styles.eyebrow}`}>Featured Project</p>
-        <h2 className={styles.title}>Meridian Hotel</h2>
+        <AnimatedHeading elementType="h2" className={styles.title}>
+          Meridian Hotel
+        </AnimatedHeading>
         <p className={styles.meta}>Goa, India · 2023 · Hospitality</p>
         <Link href="/projects/meridian-hotel" className={styles.cta}>
           <span>Explore this project</span>

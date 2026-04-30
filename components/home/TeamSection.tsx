@@ -6,6 +6,7 @@ import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { team } from '@/data/team';
+import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import styles from './TeamSection.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -77,7 +78,9 @@ export default function TeamSection() {
         {/* Header */}
         <div className={styles.header} ref={headerRef}>
           <p className={`text-eyebrow ${styles.eyebrow}`}>The People</p>
-          <h2 className={styles.title}>Studio <span className="font-serif-accent">Culture</span></h2>
+          <AnimatedHeading elementType="h2" className={styles.title}>
+            Studio <span className="font-serif-accent">Culture</span>
+          </AnimatedHeading>
         </div>
 
         {/* Team grid */}
@@ -94,7 +97,9 @@ export default function TeamSection() {
                 />
               </div>
               <div className={styles.info}>
-                <h3 className={styles.name}>{member.name}</h3>
+                <AnimatedHeading elementType="h3" className={styles.name}>
+                  {member.name}
+                </AnimatedHeading>
                 <p className={styles.role}>{member.role}</p>
                 <p className={styles.bio}>{member.bio}</p>
               </div>
