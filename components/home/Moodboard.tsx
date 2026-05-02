@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, MotionValue, useScroll, useTransform } from 'framer-motion';
+import { motion, MotionValue, useScroll, useTransform, Variants } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import AnimatedHeading from '@/components/animations/AnimatedHeading';
@@ -22,7 +22,7 @@ const images = [
   '/images/projects/DSC06981.jpg',
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   show: {
     transition: {
@@ -31,7 +31,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: {
     opacity: 0,
     y: 30,
@@ -151,7 +151,7 @@ export default function Moodboard() {
             const initialTablet = isTablet ? { opacity: 0, y: 30 } : false;
             const whileInViewTablet = isTablet ? { opacity: 1, y: 0 } : undefined;
             const viewportTablet = isTablet ? { once: true, margin: "-50px" } : undefined;
-            const transitionTablet = isTablet ? { duration: 0.8, ease: "easeOut", delay: (index % columns) * 0.15 } : undefined;
+            const transitionTablet = isTablet ? { duration: 0.8, ease: "easeOut" as const, delay: (index % columns) * 0.15 } : undefined;
 
             return (
               <motion.div
