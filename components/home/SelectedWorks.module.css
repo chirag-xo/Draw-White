@@ -1,0 +1,18 @@
+.desktopOnly {
+  display: none;
+  width: 100%;
+}
+
+.mobileOnly {
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 1150px) {
+  .desktopOnly {
+    display: block;
+  }
+  .mobileOnly {
+    display: none;
+  }
+}

@@ -19,6 +19,8 @@ interface Props {
 
 function AllProjectsPanel({ originX, originY, onClose }: Props) {
   const [activeCategory, setActiveCategory] = useState<Category>('All');
+  const [isMobile, setIsMobile] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const filtered = activeCategory === 'All'
     ? projects
@@ -29,10 +31,15 @@ function AllProjectsPanel({ originX, originY, onClose }: Props) {
     if ((window as any).lenis) (window as any).lenis.stop();
     document.body.style.overflow = 'hidden';
 
+    const checkMobile = () => setIsMobile(window.innerWidth <= 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     return () => {
       // Resume Lenis
       if ((window as any).lenis) (window as any).lenis.start();
       document.body.style.overflow = '';
+      window.removeEventListener('resize', checkMobile);
     };
   }, []);
 
@@ -105,72 +112,153 @@ function AllProjectsPanel({ originX, originY, onClose }: Props) {
         </button>
 
         {/* Category filters */}
-        <nav style={{ display: 'flex', gap: '0', alignItems: 'center' }}>
-          {CATEGORIES.map((cat) => (
+        {isMobile ? (
+          <div style={{ position: 'relative' }}>
             <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => setDropdownOpen(!dropdownOpen)}
               style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
                 fontFamily: 'var(--font-ui)',
                 fontSize: '11px',
                 letterSpacing: '0.16em',
                 textTransform: 'uppercase',
-                color: activeCategory === cat ? '#0D0D0D' : 'rgba(0,0,0,0.35)',
+                color: '#0D0D0D',
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
-                padding: '0 20px',
-                paddingBottom: '2px',
-                borderBottom: activeCategory === cat ? '1px solid #0D0D0D' : '1px solid transparent',
-                transition: 'all 0.3s ease',
+                padding: '0',
                 lineHeight: '64px',
               }}
             >
-              <span style={{ display: 'inline-flex', alignItems: 'center' }}>
-                {cat === 'All' ? 'ALL WORK' : cat.toUpperCase()}
-                <span style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '14px',
-                  marginLeft: '4px'
-                }}>
-                  <AnimatePresence mode="wait">
-                    {activeCategory === cat ? (
-                      <motion.span
-                        key="star"
-                        initial={{ scale: 0, rotate: -45 }}
-                        animate={{ scale: 1, rotate: 360 }}
-                        exit={{ scale: 0, rotate: 45 }}
-                        transition={{
-                          scale: { type: 'spring', stiffness: 300, damping: 20 },
-                          rotate: { duration: 6, repeat: Infinity, ease: "linear" }
-                        }}
-                        style={{ display: 'inline-flex', transformOrigin: 'center' }}
-                      >
-                        <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M12 0L13.46 10.54L24 12L13.46 13.46L12 24L10.54 13.46L0 12L10.54 10.54L12 0Z" />
-                        </svg>
-                      </motion.span>
-                    ) : (
-                      cat === 'All' && (
-                        <motion.span
-                          key="plus"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 0.35 }}
-                          exit={{ opacity: 0 }}
-                          style={{ fontSize: '13px', fontWeight: 300 }}
-                        >
-                          +
-                        </motion.span>
-                      )
-                    )}
-                  </AnimatePresence>
-                </span>
-              </span>
+              {activeCategory === 'All' ? 'ALL WORK' : activeCategory.toUpperCase()}
+              <motion.svg
+                animate={{ rotate: dropdownOpen ? 180 : 0 }}
+                width="10" height="6" viewBox="0 0 10 6" fill="none"
+              >
+                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+              </motion.svg>
             </button>
-          ))}
-        </nav>
+
+            <AnimatePresence>
+              {dropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    right: 0,
+                    background: '#F8F7F4',
+                    border: '1px solid rgba(0,0,0,0.06)',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+                    padding: '8px 0',
+                    zIndex: 20,
+                    minWidth: '160px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  {CATEGORIES.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => {
+                        setActiveCategory(cat);
+                        setDropdownOpen(false);
+                      }}
+                      style={{
+                        fontFamily: 'var(--font-ui)',
+                        fontSize: '10px',
+                        letterSpacing: '0.14em',
+                        textTransform: 'uppercase',
+                        color: activeCategory === cat ? '#0D0D0D' : 'rgba(0,0,0,0.45)',
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        padding: '12px 24px',
+                        textAlign: 'right',
+                        width: '100%',
+                        transition: 'color 0.3s ease',
+                      }}
+                    >
+                      {cat === 'All' ? 'ALL WORK' : cat.toUpperCase()}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        ) : (
+          <nav style={{ display: 'flex', gap: '0', alignItems: 'center' }}>
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                style={{
+                  fontFamily: 'var(--font-ui)',
+                  fontSize: '11px',
+                  letterSpacing: '0.16em',
+                  textTransform: 'uppercase',
+                  color: activeCategory === cat ? '#0D0D0D' : 'rgba(0,0,0,0.35)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: '0 20px',
+                  paddingBottom: '2px',
+                  borderBottom: activeCategory === cat ? '1px solid #0D0D0D' : '1px solid transparent',
+                  transition: 'all 0.3s ease',
+                  lineHeight: '64px',
+                }}
+              >
+                <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  {cat === 'All' ? 'ALL WORK' : cat.toUpperCase()}
+                  <span style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '14px',
+                    marginLeft: '4px'
+                  }}>
+                    <AnimatePresence mode="wait">
+                      {activeCategory === cat ? (
+                        <motion.span
+                          key="star"
+                          initial={{ scale: 0, rotate: -45 }}
+                          animate={{ scale: 1, rotate: 360 }}
+                          exit={{ scale: 0, rotate: 45 }}
+                          transition={{
+                            scale: { type: 'spring', stiffness: 300, damping: 20 },
+                            rotate: { duration: 6, repeat: Infinity, ease: "linear" }
+                          }}
+                          style={{ display: 'inline-flex', transformOrigin: 'center' }}
+                        >
+                          <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0L13.46 10.54L24 12L13.46 13.46L12 24L10.54 13.46L0 12L10.54 10.54L12 0Z" />
+                          </svg>
+                        </motion.span>
+                      ) : (
+                        cat === 'All' && (
+                          <motion.span
+                            key="plus"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 0.35 }}
+                            exit={{ opacity: 0 }}
+                            style={{ fontSize: '13px', fontWeight: 300 }}
+                          >
+                            +
+                          </motion.span>
+                        )
+                      )}
+                    </AnimatePresence>
+                  </span>
+                </span>
+              </button>
+            ))}
+          </nav>
+        )}
       </div>
 
       {/* ── Project grid ───────────────── */}
@@ -180,8 +268,8 @@ function AllProjectsPanel({ originX, originY, onClose }: Props) {
         transition={{ delay: 0.4, duration: 0.5 }}
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '2px',
+          gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+          gap: isMobile ? '12px' : '2px',
           padding: 'clamp(24px, 4vw, 48px) clamp(24px, 5vw, 80px)',
           paddingTop: 'clamp(40px, 6vw, 80px)',
         }}
@@ -294,6 +382,13 @@ export default function AllProjectsButton() {
   const [open, setOpen] = useState(false);
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
   const btnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.search.includes('view=all')) {
+      setOrigin({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+      setOpen(true);
+    }
+  }, []);
 
   const handleOpen = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();

@@ -506,3 +506,65 @@
   background: linear-gradient(to top, rgba(10,10,10,0.1) 0%, transparent 40%);
   pointer-events: none;
 }
+
+/* ── Tablet Overrides (768px–1024px) ─────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .host {
+    padding-bottom: var(--space-2xl);
+  }
+
+  /* Contact header: reduce height on tablet */
+  .header {
+    height: clamp(360px, 55vh, 560px);
+  }
+
+  /* Narrower sticky image on tablet to give form more space */
+  .imageCol {
+    width: 280px;
+  }
+
+  /* Touch-friendly tab targets */
+  .tab {
+    padding: var(--space-sm) var(--space-sm);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Submit button: full width on tablet for easier tap */
+  .submitBtn {
+    width: 100%;
+    min-height: 52px;
+    font-size: 12px;
+  }
+
+  /* Upload button: 44px touch target */
+  .uploadIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Area circles: larger tap zone on tablet */
+  .areaCircle {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Checkbox: easier to tap */
+  .checkWrap input {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Input fields: enough height to tap comfortably */
+  .input {
+    min-height: 44px;
+    font-size: 16px; /* Prevent iOS zoom on focus */
+  }
+
+  .select {
+    min-height: 44px;
+    font-size: 16px; /* Prevent iOS zoom on focus */
+  }
+}
+

@@ -203,6 +203,18 @@
   color: var(--color-text-muted);
 }
 
+@media (max-width: 968px) {
+  .valuesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Team */
 .teamSection {
   background: var(--color-bg-warm);

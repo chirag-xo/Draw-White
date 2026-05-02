@@ -114,3 +114,42 @@
 }
 
 .floatLabel.visible { opacity: 1; }
+
+/* ── Tablet Overrides (768px–1024px) ─────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Reduce section height — 85vh is sufficient at tablet */
+  .section {
+    min-height: 600px;
+    height: 85vh;
+  }
+
+  /* Tame parallax inset on tablet */
+  .imageWrap {
+    inset: -8%;
+  }
+
+  /* Tighten content padding */
+  .content {
+    padding: var(--space-xl) var(--gutter);
+    gap: var(--space-sm);
+  }
+
+  .title {
+    font-size: var(--text-title);
+    max-width: 12ch;
+  }
+
+  /* Ensure CTA link meets 44px touch target */
+  .cta {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: flex-end;
+  }
+
+  /* Scale down float label */
+  .floatLabel {
+    font-size: 12px;
+    top: var(--space-lg);
+  }
+}
+

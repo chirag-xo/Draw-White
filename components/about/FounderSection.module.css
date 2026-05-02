@@ -173,43 +173,102 @@
   }
 }
 
-/* Tablet / Mobile */
-@media (max-width: 1024px) {
+/* Tablet: 768px–1024px */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .headingBlock {
+    margin-bottom: 72px;
+  }
+
   .founderRow {
-    gap: 40px;
-    min-height: auto;
+    /* Tighten gap, reduce min height */
+    gap: 48px;
+    min-height: unset;
+    margin-bottom: 96px;
   }
-  
-  .founderRow.reverseRow .imageBlock,
-  .founderRow.reverseRow .textBlock {
-    grid-column: span 12;
-    order: initial;
-  }
-  
+
+  /* Keep 12-col grid but shift proportions: image 6, text 6 */
   .imageBlock {
-    grid-column: span 12;
+    grid-column: span 6;
   }
-  
+
   .textBlock {
-    grid-column: span 12;
+    grid-column: span 6;
+  }
+
+  /* Reverse rows stay correct */
+  .founderRow.reverseRow .imageBlock {
+    grid-column: 7 / span 6;
+    order: 2;
+  }
+
+  .founderRow.reverseRow .textBlock {
+    grid-column: 1 / span 6;
+    order: 1;
+  }
+
+  .name {
+    font-size: clamp(28px, 3.5vw, 40px);
+  }
+
+  .sectionDescription {
+    font-size: 16px;
   }
 }
 
-@media (max-width: 768px) {
+
+@media (max-width: 640px) {
   .founderSection {
-    padding: 60px 0;
+    padding: 48px 0;
   }
-  
+
+  .headingBlock {
+    margin-bottom: 56px;
+  }
+
+  /* Single-column stack: image on top, text below */
   .founderRow {
-    margin-bottom: 80px;
-    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    min-height: unset;
+    margin-bottom: 72px;
   }
-  
+
+  /* Always image first regardless of reverseRow */
+  .imageBlock {
+    width: 100%;
+    order: 1;
+  }
+
+  .textBlock {
+    width: 100%;
+    order: 2;
+  }
+
+  /* Override reverse-row reordering on mobile */
+  .founderRow.reverseRow .imageBlock {
+    order: 1;
+  }
+
+  .founderRow.reverseRow .textBlock {
+    order: 2;
+  }
+
+  /* Image fills full width */
+  .imageWrapper {
+    aspect-ratio: 4 / 3;
+    width: 100%;
+  }
+
   .name {
-    font-size: 32px;
+    font-size: 28px;
   }
-  
+
   .quote {
-    font-size: 20px;
+    font-size: 18px;
+  }
+
+  .sectionDescription {
+    font-size: 15px;
   }
 }

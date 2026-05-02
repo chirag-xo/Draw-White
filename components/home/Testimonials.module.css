@@ -154,3 +154,53 @@
     width: 100px;
   }
 }
+
+/* ── Tablet Overrides (768px–1024px) ─────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .section {
+    padding: 80px 0;
+  }
+
+  .header {
+    margin-bottom: 48px;
+  }
+
+  /* Slightly reduce card sizes for tablet viewport */
+  .imageCard {
+    width: 300px;
+  }
+
+  .quoteCard {
+    width: 380px;
+    padding: 40px;
+  }
+
+  /* Enable smooth touch scrolling with momentum */
+  .marqueeContainer {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    cursor: default;
+    /* Pause auto-scroll animation on touch devices — let user drag */
+  }
+
+  /* Scroll snap for discrete card stops */
+  .track {
+    scroll-snap-type: x mandatory;
+  }
+
+  .card {
+    scroll-snap-align: start;
+  }
+
+  /* Touch: active scale instead of hover */
+  .card:active {
+    transform: scale(1.01);
+  }
+
+  /* Reduce gap for tighter feel on 768px+ */
+  .track {
+    gap: 28px;
+  }
+}
+

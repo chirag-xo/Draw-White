@@ -226,6 +226,12 @@
   .narrativeImage.wide {
     grid-column: span 1;
   }
+  .materialGrid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    gap: 40px 24px;
+  }
 }
 
 /* Next project */

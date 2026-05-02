@@ -190,3 +190,51 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* ── Tablet Overrides (768px–1024px) ─────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .section {
+    padding: clamp(60px, 8vw, 100px) var(--gutter) 60px;
+  }
+
+  /* Single-col at tablet: 12-col grid only activates at 1024px+ */
+  .grid {
+    gap: 40px;
+  }
+
+  /* No sticky header on tablet (not enough height) */
+  .header {
+    position: static;
+  }
+
+  .title {
+    font-size: clamp(32px, 5vw, 52px);
+    padding: 0.15em 0;
+  }
+
+  .subtitle {
+    max-width: 100%;
+  }
+
+  /* Tighten trigger tap area — must be ≥44px */
+  .trigger {
+    padding: 20px 24px;
+    min-height: 44px;
+  }
+
+  .icon {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .answer {
+    padding: 0 24px 28px;
+  }
+
+  /* Touch: active tap state instead of hover scale */
+  .card:active {
+    transform: scale(1.002);
+    background: #d0d0d0;
+  }
+}
+

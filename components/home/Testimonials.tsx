@@ -107,7 +107,7 @@ export default function Testimonials() {
 
   useGSAP(
     () => {
-      if (!trackRef.current) return;
+      if (!trackRef.current || !containerRef.current) return;
 
       const items = gsap.utils.toArray<HTMLElement>(`.${styles.card}`, trackRef.current);
 
@@ -117,13 +117,69 @@ export default function Testimonials() {
         paddingRight: 40,
       });
 
-      // Pause on hover
       const track = trackRef.current;
-      track.addEventListener('mouseenter', () => loop.pause());
-      track.addEventListener('mouseleave', () => loop.play());
+      const container = containerRef.current;
+
+      let isDragging = false;
+      let startX = 0;
+      let startTime = 0;
+
+      // Pause on hover (only on desktop where hover makes sense)
+      const onMouseEnter = () => { if (!isDragging) loop.pause(); };
+      const onMouseLeave = () => { if (!isDragging) loop.play(); };
+      track.addEventListener('mouseenter', onMouseEnter);
+      track.addEventListener('mouseleave', onMouseLeave);
+
+      // Drag / Swipe logic
+      const onDown = (e: MouseEvent | TouchEvent) => {
+        isDragging = true;
+        loop.pause();
+        startX = e instanceof MouseEvent ? e.pageX : e.touches[0].pageX;
+        startTime = loop.totalTime();
+        // Prevent default only for mouse to avoid text selection
+        if (e instanceof MouseEvent) e.preventDefault();
+      };
+
+      const onMove = (e: MouseEvent | TouchEvent) => {
+        if (!isDragging) return;
+        const currentX = e instanceof MouseEvent ? e.pageX : e.touches[0].pageX;
+        const diffX = currentX - startX;
+        
+        // At speed 0.6, pixels per second is 60.
+        // Multiply by 1.2 for slightly more responsive drag tracking.
+        const timeOffset = (diffX / 60) * 1.2;
+        
+        let newTime = startTime - timeOffset;
+        if (newTime < 0) {
+          newTime += loop.duration() * 1000;
+        }
+        loop.totalTime(newTime);
+      };
+
+      const onUp = () => {
+        if (isDragging) {
+          isDragging = false;
+          loop.play();
+        }
+      };
+
+      container.addEventListener('mousedown', onDown);
+      container.addEventListener('touchstart', onDown, { passive: true });
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('touchmove', onMove, { passive: true });
+      window.addEventListener('mouseup', onUp);
+      window.addEventListener('touchend', onUp);
 
       return () => {
         loop.kill();
+        track.removeEventListener('mouseenter', onMouseEnter);
+        track.removeEventListener('mouseleave', onMouseLeave);
+        container.removeEventListener('mousedown', onDown);
+        container.removeEventListener('touchstart', onDown);
+        window.removeEventListener('mousemove', onMove);
+        window.removeEventListener('touchmove', onMove);
+        window.removeEventListener('mouseup', onUp);
+        window.removeEventListener('touchend', onUp);
       };
     },
     { scope: containerRef }

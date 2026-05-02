@@ -141,6 +141,23 @@
   }
 }
 
+/* ── Tablet Overrides (768px–1024px) ─────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .section {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .inner {
+    gap: clamp(16px, 2.5vw, 28px);
+  }
+
+  /* Keep quote on one line as long as possible */
+  .staticPart {
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 600px) {
   .section {
     padding-top: clamp(80px, 18vw, 120px);

@@ -38,8 +38,8 @@
 
 @media (min-width: 1024px) {
   .grid {
-    grid-template-columns: repeat(12, 1fr);
-    gap: 100px;
+    grid-template-columns: 4.5fr 7.5fr;
+    gap: clamp(48px, 6vw, 100px);
   }
 }
 
@@ -49,7 +49,7 @@
 
 @media (min-width: 1024px) {
   .header {
-    grid-column: span 5;
+    grid-column: span 1;
     position: sticky;
     top: 140px;
   }
@@ -98,7 +98,7 @@
 
 @media (min-width: 1024px) {
   .cardsGrid {
-    grid-column: span 7;
+    grid-column: span 1;
   }
 }
 
@@ -149,4 +149,55 @@
 
 .processCard:hover .stepDescription {
   color: rgba(255, 255, 255, 0.7);
+}
+
+/* ── Tablet Overrides (768px–1024px) ─────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .section {
+    padding: clamp(72px, 10vw, 120px) var(--gutter);
+  }
+
+  /* Full-width single-col layout (12-col grid only at desktop) */
+  .grid {
+    gap: 48px;
+  }
+
+  /* Ensure header is not sticky below desktop */
+  .header {
+    position: static;
+  }
+
+  /* Slightly tighten card padding */
+  .processCard {
+    padding: 36px 28px;
+  }
+
+  .title {
+    font-size: clamp(32px, 5vw, 52px);
+  }
+
+  /* Cards 2-col grid already active at 768px+ */
+  .cardsGrid {
+    gap: 20px;
+  }
+
+  .stepTitle {
+    font-size: 24px;
+  }
+
+  /* Touch: replace hover dark card with active state */
+  .processCard:active {
+    background: #000000;
+    color: #ffffff;
+    transform: translateY(-4px);
+    border-color: #000000;
+  }
+
+  .processCard:active .stepNumber {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .processCard:active .stepDescription {
+    color: rgba(255, 255, 255, 0.7);
+  }
 }

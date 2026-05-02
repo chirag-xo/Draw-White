@@ -148,3 +148,63 @@
   text-transform: uppercase;
   color: var(--color-text-subtle);
 }
+
+/* ── Tablet Overrides (768px–1024px) ─────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Stack grid vertically: image on top, text below */
+  .grid {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  /* Image col takes a fixed proportion */
+  .imageCol {
+    height: 60vw;
+    min-height: 420px;
+    max-height: 560px;
+  }
+
+  /* Reduce parallax inset — less aggressive on tablet */
+  .imageWrap {
+    inset: -8%;
+  }
+
+  /* Text column: tighter padding for tablet viewport */
+  .textCol {
+    padding: var(--space-2xl) var(--gutter);
+    gap: var(--space-md);
+  }
+
+  .title {
+    font-size: var(--text-title);
+  }
+
+  .body p {
+    max-width: 60ch;
+  }
+
+  /* Stats bar: 2x2 on tablet */
+  .statsBar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  /* Remove right border from 2nd col (end of row) */
+  .stat:nth-child(2) {
+    border-right: none;
+  }
+
+  /* Add bottom border between rows */
+  .stat:nth-child(1),
+  .stat:nth-child(2) {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .statValue {
+    font-size: clamp(40px, 6vw, 64px);
+  }
+}
+

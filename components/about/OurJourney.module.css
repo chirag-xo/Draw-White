@@ -1,11 +1,21 @@
+/* ══════════════════════════════════════════════════════════════
+   OurJourney — CSS Module
+   • Desktop (≥969px): sticky left panel + scrolling right image stack
+   • Tablet/Mobile (≤968px): interleaved vertical card layout
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Section Shell ──────────────────────────────────────────── */
 .section {
   position: relative;
   width: 100%;
   background-color: var(--color-bg-white);
   color: var(--color-text-primary);
-  overflow: visible; /* Ensure sticky works */
+  overflow: visible; /* sticky must not be clipped */
 }
 
+/* ══════════════════════════════════════════════════════════════
+   DESKTOP LAYOUT — sticky left / scrolling right
+   ══════════════════════════════════════════════════════════════ */
 .stickyContent {
   display: flex;
   min-height: 100vh;
@@ -40,6 +50,7 @@
   margin-bottom: 40px;
 }
 
+/* Timeline progress bar */
 .timelineProgress {
   position: absolute;
   left: 0;
@@ -66,8 +77,11 @@
   background: var(--color-text-primary);
   border-radius: 99px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
+/* Text container — overlapping absolute blocks, one visible at a time */
 .textContainer {
   position: relative;
   height: 400px;
@@ -80,7 +94,10 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s 0.55s;
   width: 100%;
 }
 
@@ -88,8 +105,31 @@
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s;
 }
 
+/* Right column — image stack */
+.rightCol {
+  width: 50%;
+  position: relative;
+}
+
+.imageStack {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+}
+
+/* ── Shared Typography ──────────────────────────────────────── */
 .year {
   display: block;
   font-family: var(--font-display);
@@ -111,26 +151,9 @@
 .story {
   font-family: var(--font-body);
   font-size: clamp(15px, 1.2vw, 18px);
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--color-text-muted);
   max-width: 55ch;
-}
-
-.rightCol {
-  width: 50%;
-  position: relative;
-}
-
-.imageStack {
-  display: flex;
-  flex-direction: column;
-}
-
-.imageWrap {
-  position: relative;
-  width: 100%;
-  height: 80vh;
-  overflow: hidden;
 }
 
 .image {
@@ -139,40 +162,150 @@
   transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@media (max-width: 968px) {
-  .stickyContent {
-    flex-direction: column;
-  }
+/* ══════════════════════════════════════════════════════════════
+   TABLET / MOBILE LAYOUT — interleaved narrative cards
+   ══════════════════════════════════════════════════════════════ */
+.mobileLayout {
+  padding: 72px var(--gutter) 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* controlled by card margins */
+}
 
+.eyebrowMobile {
+  font-family: var(--font-display);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+  margin-bottom: 48px;
+}
+
+/* Each paired milestone: text above, image below */
+.milestoneCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 72px; /* vertical rhythm between milestones */
+}
+
+.milestoneCard:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Text reveal animation ──────────────────────────────────── */
+.milestoneText {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+  margin-bottom: 24px; /* gap between text and image */
+}
+
+.milestoneText.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tablet-specific typography */
+.milestoneText .year {
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: var(--color-text-muted);
+}
+
+.milestoneText .title {
+  font-size: clamp(28px, 5vw, 42px);
+  margin-bottom: 16px;
+  letter-spacing: -0.025em;
+}
+
+.milestoneText .story {
+  font-size: clamp(15px, 2vw, 17px);
+  max-width: 60ch;
+  line-height: 1.7;
+}
+
+/* ── Image reveal animation (delayed) ──────────────────────── */
+.milestoneImageWrap {
+  position: relative;
+  width: 100%;
+  height: clamp(260px, 55vw, 480px);
+  overflow: hidden;
+  border-radius: 4px;
+
+  opacity: 0;
+  transform: translateY(60px);
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.12s,
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+  will-change: opacity, transform;
+}
+
+.milestoneImageWrap.revealedImage {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE FINE-TUNING
+   ══════════════════════════════════════════════════════════════ */
+
+/* Large tablet: slightly tighter desktop padding */
+@media (min-width: 969px) and (max-width: 1200px) {
   .leftCol {
-    width: 100%;
-    height: auto;
-    position: relative;
-    padding: 80px 24px 40px;
+    padding-left: var(--gutter);
   }
 
-  .rightCol {
-    width: 100%;
+  .contentWrap {
+    padding-right: var(--gutter);
+    padding-left: 28px;
   }
 
-  .imageWrap {
-    height: 70vh;
+  .title {
+    font-size: clamp(28px, 3.2vw, 48px);
+  }
+}
+
+/* Small tablet: tighter card spacing */
+@media (max-width: 640px) {
+  .mobileLayout {
+    padding: 56px var(--gutter) 64px;
   }
 
-  .textContainer {
-    height: auto;
-    position: relative;
+  .milestoneCard {
+    margin-bottom: 56px;
+  }
+
+  .milestoneImageWrap {
+    height: clamp(220px, 65vw, 360px);
+  }
+}
+
+/* Prevent iOS zoom on tap — no font-size < 16px on interactive areas */
+@media (max-width: 968px) {
+  .story,
+  .milestoneText .story {
+    font-size: 16px;
+  }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .milestoneText,
+  .milestoneImageWrap {
+    transition: none;
+    opacity: 1;
+    transform: none;
   }
 
   .textBlock {
-    position: relative;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    margin-bottom: 60px;
+    transition: opacity 0.2s;
   }
-  
-  .timelineProgress {
-    display: none;
+
+  .pill {
+    transition: none;
   }
 }

@@ -129,16 +129,29 @@ button {
   --leading-body:    1.65;
 }
 
-/* ── BREAKPOINT OVERRIDES ── Tablet (≤1024px) ───────────────── */
-@media (max-width: 1024px) {
+/* ── BREAKPOINT OVERRIDES ── Tablet (768px–1024px) ──────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
   :root {
-    --text-hero:    72px;
-    --text-display: 52px;
-    --text-title:   36px;
-    --text-lead:    20px;
-    --text-body:    17px;
+    --text-hero:    68px;
+    --text-display: 48px;
+    --text-title:   34px;
+    --text-lead:    19px;
+    --text-body:    16px;
     --text-small:   13px;
     --text-eyebrow: 11px;
+
+    /* Spacing is now fully fluid via clamp(), overrides removed */
+
+    /* Tablet container & gutters */
+    --container: 1100px;
+    --gutter:    clamp(24px, 4vw, 48px);
+    --col-gap:   clamp(14px, 2vw, 24px);
+
+    /* Reduced parallax intensity on touch devices */
+    --img-hover-scale: 1.04;
+
+    /* Nav height */
+    --nav-height: 64px;
   }
 }
 
@@ -185,17 +198,29 @@ button {
 
 /* ── SPACING TOKENS ─────────────────────────────────────────── */
 :root {
-  --space-xs:  8px;
-  --space-sm:  16px;
-  --space-md:  32px;
-  --space-lg:  64px;
-  --space-xl:  96px;
-  --space-2xl: 144px;
-  --space-3xl: 192px;
+  --space-xs:  clamp(8px, 1vw, 12px);
+  --space-sm:  clamp(12px, 2vw, 20px);
+  --space-md:  clamp(16px, 3vw, 32px);
+  --space-lg:  clamp(24px, 4vw, 48px);
+  --space-xl:  clamp(32px, 6vw, 80px);
+  --space-2xl: clamp(48px, 8vw, 144px);
+  --space-3xl: clamp(64px, 10vw, 192px);
 
   --container: 1440px;
   --gutter:    clamp(24px, 4vw, 64px);
   --col-gap:   clamp(16px, 2vw, 32px);
+}
+
+/* ── TOUCH TARGET UTILITY ───────────────────────────────────── */
+/* Ensures interactive elements meet 44px minimum tap target    */
+@media (max-width: 1024px) and (pointer: coarse) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* ── LAYOUT UTILITIES ───────────────────────────────────────── */
@@ -256,6 +281,14 @@ button {
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
+}
+
+/* On tablet, reduce reveal translate distance */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .reveal {
+    transform: translateY(20px);
+    filter: blur(2px);
+  }
 }
 
 .reveal-delay-1 { transition-delay: calc(var(--stagger-step) * 1); }

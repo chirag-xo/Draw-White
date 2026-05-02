@@ -140,3 +140,47 @@
 }
 
 .joinLink:hover { opacity: 0.6; }
+
+/* ── Tablet Overrides (768px–1024px) ─────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .section {
+    padding: var(--space-2xl) var(--gutter);
+  }
+
+  .header {
+    margin-bottom: var(--space-xl);
+  }
+
+  /* 3-col → 2-col on tablet */
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--col-gap);
+  }
+
+  /* Portrait stays 3:4 */
+  .portrait {
+    aspect-ratio: 3 / 4;
+  }
+
+  /* Stack join bar vertically on narrow tablets */
+  .join {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding-top: var(--space-lg);
+  }
+
+  .joinLink {
+    margin-left: 0;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Touch: image reveal is always partially visible */
+  .portrait img {
+    filter: grayscale(40%);
+    transform: scale(1.04);
+  }
+}
+

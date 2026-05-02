@@ -23,20 +23,31 @@ function getSlotConfig(
   isTablet: boolean,
   containerH: number
 ) {
-  const activeW = isMobile
-    ? Math.min(containerW - 48, containerW * 0.82)
-    : isTablet
-      ? 680
-      : 1060;
-  const adjW = isMobile ? 140 : isTablet ? 320 : 460;
-  const farW = isMobile ? 80 : isTablet ? 180 : 300;
+  // ── Mobile: full-screen slide, only active visible ──
+  if (isMobile) {
+    switch (slot) {
+      case 0:
+        return { x: 0, y: 0, width: containerW, height: containerH, scale: 1, opacity: 1, brightness: 1, zIndex: 5 };
+      case 1:
+        return { x: containerW + 8, y: 0, width: containerW, height: containerH, scale: 1, opacity: 1, brightness: 1, zIndex: 3 };
+      case -1:
+        return { x: -containerW - 8, y: 0, width: containerW, height: containerH, scale: 1, opacity: 1, brightness: 1, zIndex: 3 };
+      default:
+        return slot > 0
+          ? { x: containerW * 2, y: 0, width: containerW, height: containerH, scale: 1, opacity: 0, brightness: 1, zIndex: 0 }
+          : { x: -containerW * 2, y: 0, width: containerW, height: containerH, scale: 1, opacity: 0, brightness: 1, zIndex: 0 };
+    }
+  }
 
-  const activeH = isMobile ? 260 : isTablet ? 440 : 600;
-  const adjH = isMobile ? 160 : isTablet ? 300 : 420;
-  const farH = isMobile ? 100 : isTablet ? 220 : 320;
-
+  // ── Desktop / Tablet ──
+  const activeW = isTablet ? 680 : 1060;
+  const adjW = isTablet ? 320 : 460;
+  const farW = isTablet ? 180 : 300;
+  const activeH = isTablet ? 440 : 600;
+  const adjH = isTablet ? 300 : 420;
+  const farH = isTablet ? 220 : 320;
   const centerX = containerW / 2;
-  const gap = isMobile ? 10 : 18;
+  const gap = 18;
   const centerY = (h: number) => (containerH - h) / 2;
 
   switch (slot) {
@@ -89,7 +100,8 @@ export default function FeaturedProjectsCarousel() {
   // Responsive
   useEffect(() => {
     const check = () => {
-      setIsMobile(window.innerWidth < 768);
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
       setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024);
       if (containerRef.current) setContainerW(containerRef.current.offsetWidth);
     };
@@ -101,13 +113,13 @@ export default function FeaturedProjectsCarousel() {
   const positionCards = useCallback(
     (activeIndex: number) => {
       const cw = containerRef.current?.offsetWidth ?? containerW;
+      const ch = isMobile ? 460 : isTablet ? 440 : 600;
       projects.forEach((_, i) => {
         const el = cardRefs.current[i];
         if (!el) return;
         const diff = i - activeIndex;
         const wrappedDiff = Math.abs(diff) <= TOTAL / 2 ? diff : diff > 0 ? diff - TOTAL : diff + TOTAL;
         const slot = Math.max(-3, Math.min(3, wrappedDiff));
-        const ch = isMobile ? 260 : isTablet ? 440 : 600;
         const config = getSlotConfig(slot, cw, isMobile, isTablet, ch);
         gsap.set(el, { x: config.x, y: config.y, width: config.width, height: config.height, opacity: config.opacity, scale: config.scale, zIndex: config.zIndex });
         el.style.filter = config.brightness < 1 ? `brightness(${config.brightness})` : 'none';
@@ -146,13 +158,13 @@ export default function FeaturedProjectsCarousel() {
         },
       });
 
+      const ch = isMobile ? 460 : isTablet ? 440 : 600;
       projects.forEach((_, i) => {
         const el = cardRefs.current[i];
         if (!el) return;
         const diff = i - target;
         const wrappedDiff = Math.abs(diff) <= TOTAL / 2 ? diff : diff > 0 ? diff - TOTAL : diff + TOTAL;
         const slot = Math.max(-3, Math.min(3, wrappedDiff));
-        const ch = isMobile ? 260 : isTablet ? 440 : 600;
         const config = getSlotConfig(slot, cw, isMobile, isTablet, ch);
         tl.to(el, {
           x: config.x, y: config.y, width: config.width, height: config.height,
@@ -247,17 +259,19 @@ export default function FeaturedProjectsCarousel() {
     return wrappedDiff;
   };
 
-  const carouselH = isMobile ? 260 : isTablet ? 440 : 600;
+  const carouselH = isMobile ? 460 : isTablet ? 440 : 600;
 
   return (
     <section
       aria-labelledby="featured-projects-heading"
-      style={{ background: '#fff', paddingBottom: '60px' }}
+      style={{ background: '#fff', paddingBottom: isMobile ? '40px' : '60px' }}
     >
       {/* Header */}
       <div style={{
         position: 'relative',
-        padding: 'clamp(64px, 8vw, 120px) var(--gutter) clamp(32px, 4vw, 48px)',
+        padding: isMobile
+          ? 'clamp(40px, 6vw, 64px) var(--gutter) clamp(16px, 3vw, 24px)'
+          : 'clamp(64px, 8vw, 120px) var(--gutter) clamp(32px, 4vw, 48px)',
         display: 'flex',
         alignItems: 'flex-end',
         justifyContent: 'space-between'
@@ -278,28 +292,30 @@ export default function FeaturedProjectsCarousel() {
             Featured Projects
           </AnimatedHeading>
         </div>
-        {/* Counter */}
-        <div style={{
-          display: 'flex',
-          alignItems: 'baseline',
-          gap: '6px',
-          paddingBottom: '6px'
-        }}>
-          <span style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '36px',
-            fontWeight: 300,
-            color: '#0D0D0D',
-            lineHeight: 1,
-            transition: 'all 0.5s ease',
+        {/* Counter — hidden on mobile */}
+        {!isMobile && (
+          <div style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            gap: '6px',
+            paddingBottom: '6px'
           }}>
-            {String(displayCurrent + 1).padStart(2, '0')}
-          </span>
-          <span style={{ fontFamily: 'var(--font-ui)', fontSize: '12px', color: 'rgba(0,0,0,0.3)' }}>/</span>
-          <span style={{ fontFamily: 'var(--font-ui)', fontSize: '12px', color: 'rgba(0,0,0,0.3)', letterSpacing: '0.04em' }}>
-            {String(TOTAL).padStart(2, '0')}
-          </span>
-        </div>
+            <span style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: '36px',
+              fontWeight: 300,
+              color: '#0D0D0D',
+              lineHeight: 1,
+              transition: 'all 0.5s ease',
+            }}>
+              {String(displayCurrent + 1).padStart(2, '0')}
+            </span>
+            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '12px', color: 'rgba(0,0,0,0.3)' }}>/</span>
+            <span style={{ fontFamily: 'var(--font-ui)', fontSize: '12px', color: 'rgba(0,0,0,0.3)', letterSpacing: '0.04em' }}>
+              {String(TOTAL).padStart(2, '0')}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Carousel */}
@@ -328,7 +344,7 @@ export default function FeaturedProjectsCarousel() {
                 position: 'absolute',
                 top: 0,
                 left: 0,
-                borderRadius: '10px',
+                borderRadius: isMobile ? '0px' : '10px',
                 overflow: 'hidden',
                 backgroundColor: '#1a1815',
                 willChange: 'width, height, transform, opacity',

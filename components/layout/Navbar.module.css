@@ -79,7 +79,7 @@
 .navCentre {
   display: flex;
   align-items: center;
-  gap: clamp(32px, 4vw, 64px);
+  gap: clamp(24px, 3vw, 64px);
   flex-shrink: 0;
 }
 
@@ -321,11 +321,11 @@
 }
 
 .hamburger.open span:first-child {
-  transform: translateY(7px) rotate(45deg);
+  transform: translateY(3.5px) rotate(45deg);
 }
 
 .hamburger.open span:last-child {
-  transform: translateY(-0px) rotate(-45deg);
+  transform: translateY(-3.5px) rotate(-45deg);
 }
 
 /* ── Mobile Menu Overlay ────────────────────────────────── */
@@ -338,10 +338,29 @@
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 120px var(--gutter) var(--space-xl);
+  padding: clamp(80px, 15vh, 120px) var(--gutter) var(--space-xl);
   z-index: 999;
   transform: translateX(100%);
   transition: transform var(--duration-mid) var(--ease-in-out);
+  overflow-y: auto;
+}
+
+.mobileMenu::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/sketches/p1.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  /* Low opacity for sketch effect */
+  mix-blend-mode: multiply;
+  /* Helps the sketch blend into the background */
+  z-index: -1;
+  pointer-events: none;
 }
 
 .mobileMenu.mobileOpen {
@@ -355,8 +374,7 @@
   line-height: 1.1;
   color: var(--color-text-primary);
   letter-spacing: var(--tracking-tight);
-  padding: 12px 0;
-  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-sm) 0;
   transition: padding-left 0.25s var(--ease-out);
 }
 
@@ -365,20 +383,100 @@
 }
 
 .mobileCta {
-  margin-top: var(--space-xl);
   font-family: var(--font-ui);
   font-size: 13px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   border: 1px solid var(--color-text-primary);
   border-radius: 100px;
-  padding: 14px 32px;
+  padding: var(--space-sm) var(--space-md);
   display: inline-block;
-  align-self: flex-start;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
 .mobileCta:hover {
   background: var(--color-text-primary);
   color: var(--color-bg-primary);
+}
+
+.mobileBottomWrap {
+  margin-top: auto;
+  padding-top: var(--space-xl);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-xl);
+  width: 100%;
+}
+
+.mobileSocials {
+  margin-top: 0;
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.mobileSocialIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--color-text-primary);
+  transition: all 0.3s ease;
+}
+
+.mobileSocialIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mobileSocialIcon:hover {
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
+}
+
+/* ── Tablet Overrides (768px–1024px) ─────────────────── */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .navbar {
+    height: 64px;
+  }
+
+  .navbar.scrolled {
+    height: 56px;
+  }
+
+  /* Keep desktop nav at tablet, but tighten logo + CTA sizes */
+  .navLink,
+  .dropdownTrigger {
+    font-size: 12px;
+  }
+
+  /* Ensure CTA meets 44px touch target */
+  .ctaCircle {
+    padding: 10px 16px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Dropdown: slightly wider for finger tapping */
+  .dropdownItem {
+    padding: 13px 24px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Touch-friendly hover state becomes active state */
+  .dropdownItem:active {
+    color: var(--color-text-primary);
+    background: rgba(0, 0, 0, 0.06);
+    padding-left: 28px;
+  }
 }

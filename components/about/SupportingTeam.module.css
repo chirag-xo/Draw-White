@@ -25,11 +25,12 @@
 }
 
 .sectionHeading {
-  font-family: var(--font-serif);
-  font-size: var(--text-title);
-  color: var(--color-text-primary);
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
   letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
 }
 
 .teamGrid {
@@ -106,14 +107,31 @@
   }
 }
 
-/* Tablet */
-@media (max-width: 1024px) {
+/* Tablet (641px–1024px): 3-col grid, touch-friendly overlay */
+@media (min-width: 641px) and (max-width: 1024px) {
   .teamGrid {
     grid-template-columns: repeat(3, 1fr);
+    gap: clamp(14px, 2vw, 20px);
+  }
+
+  /* Touch: always-visible overlay (no hover on tablet) */
+  .overlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0) 52%);
+  }
+
+  .overlayContent {
+    transform: translateY(0);
+  }
+
+  /* Active tap feedback */
+  .teamCard:active .image {
+    transform: scale(1.03);
+    filter: grayscale(0.1) saturate(1);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .teamGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
@@ -139,6 +157,21 @@
 /* Mobile Small */
 @media (max-width: 480px) {
   .teamGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  
+  .overlay {
+    padding: 12px;
+  }
+
+  .name {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  .role {
+    font-size: 10px;
+    letter-spacing: 0.05em;
   }
 }
