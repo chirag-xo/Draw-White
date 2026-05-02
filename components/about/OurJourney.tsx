@@ -11,25 +11,25 @@ const journeyData = [
     year: '2013',
     title: 'The Genesis',
     story: `It began with two college friends, one laptop, and countless conversations over coffee at Cafe Coffee Day. What started with small renovations and family projects was driven by a much larger vision—to shape spaces that feel timeless.`,
-    image: '/sketches/01.png',
+    image: '/sketches/01 - Edited.png',
   },
   {
     year: '2015',
     title: 'The First Studio',
     story: `The vision took form with the opening of Draw Design's first studio in Gurgaon, led by a small team of 4. From compact renovations to boutique interiors, every project became a step toward something bigger.`,
-    image: '/sketches/02.png',
+    image: '/sketches/02 - Edited.png',
   },
   {
     year: '2017',
     title: 'The Turning Point',
     story: `Recognition followed with the studio's first design award, marking the moment Draw Design stepped into a new league. The scale grew. So did the ambition—luxury villas, high-rise residences, and larger lifestyle spaces soon followed.`,
-    image: '/sketches/03.png',
+    image: '/sketches/03 - Edited.png',
   },
   {
     year: '2026',
     title: 'Still Evolving',
     story: `Today, Draw Design is a 40+ strong team of architects and designers, crafting large-scale residences, resort-style villas, and landmark spaces. What began in a coffee shop continues to evolve—still growing, still redefining spaces.`,
-    image: '/sketches/04.png',
+    image: '/sketches/04 - Edited.png',
   },
 ];
 

@@ -129,16 +129,30 @@
 
   /* Reduce scroll header height — get to images faster */
   .scrollHeader {
-    height: 20vh;
-    min-height: 120px;
+    height: 25vh;
+    min-height: 160px;
   }
 
   .scrollFooter {
     height: 15vh;
   }
 
+  .headerContent {
+    gap: 16px;
+  }
+
+  .scrollCue {
+    padding-bottom: 50px;
+  }
+
+  .scrollCue::after {
+    height: 25px;
+    top: 25px;
+  }
+
   .title {
-    font-size: clamp(28px, 8vw, 40px);
+    font-size: clamp(26px, 7vw, 36px);
+    line-height: 1.2;
   }
 }
 

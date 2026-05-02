@@ -1,9 +1,9 @@
 'use client';
 
-import { useMemo, useRef } from 'react';
 import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import { gsap } from 'gsap';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { testimonials } from '@/data/testimonials';
 import { featuredProjects } from '@/data/projects';
 import AnimatedHeading from '@/components/animations/AnimatedHeading';
@@ -91,7 +91,6 @@ export default function Testimonials() {
     const items = [];
     const count = Math.max(testimonials.length, featuredProjects.length);
 
-    // Strictly alternate to ensure no two quotes or two images are adjacent
     for (let i = 0; i < count; i++) {
       const project = featuredProjects[i % featuredProjects.length];
       items.push({ type: 'image', data: project });
@@ -100,14 +99,27 @@ export default function Testimonials() {
       items.push({ type: 'quote', data: quote });
     }
 
-    // Multi-cloning for a truly infinite feel
     return [...items, ...items, ...items];
   }, []);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const displayItems = isMobile ? testimonials.map(t => ({ type: 'quote', data: t })) : combinedItems;
+
 
 
   useGSAP(
     () => {
+      if (isMobile) return;
       if (!trackRef.current || !containerRef.current) return;
+
 
       const items = gsap.utils.toArray<HTMLElement>(`.${styles.card}`, trackRef.current);
 
@@ -182,7 +194,7 @@ export default function Testimonials() {
         window.removeEventListener('touchend', onUp);
       };
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [isMobile] }
   );
 
   return (
@@ -194,9 +206,13 @@ export default function Testimonials() {
         </AnimatedHeading>
       </div>
 
-      <div className={styles.marqueeContainer} ref={containerRef}>
+      <div 
+        key={isMobile ? 'mobile' : 'desktop'}
+        className={`${styles.marqueeContainer} ${isMobile ? styles.mobileScroll : ''}`} 
+        ref={containerRef}
+      >
         <div className={styles.track} ref={trackRef}>
-          {combinedItems.map((item, index) => {
+          {displayItems.map((item, index) => {
             if (item.type === 'image') {
               const project = item.data as any; // Cast to bypass union property mismatch
               return (

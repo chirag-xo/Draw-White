@@ -137,21 +137,61 @@
 
 @media (max-width: 768px) {
   .section {
-    padding: 80px 0;
+    padding: 60px 0;
+  }
+
+  .header {
+    margin-bottom: 32px;
   }
   
-  .imageCard {
-    width: 280px;
+  .marqueeContainer.mobileScroll {
+    overflow-x: auto;
+    cursor: default;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 0;
+    scrollbar-width: none;
+    display: block;
+    width: 100%;
   }
-  
+
+  .marqueeContainer.mobileScroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobileScroll .track {
+    width: max-content;
+    display: flex;
+    padding: 0 30px; /* Match card offset for perfect centering */
+    gap: 16px;
+  }
+
+  .mobileScroll .card {
+    scroll-snap-align: center;
+    width: calc(100vw - 60px);
+    max-width: 380px;
+    margin: 0;
+    flex-shrink: 0;
+  }
+
   .quoteCard {
-    width: 320px;
-    padding: 32px;
+    padding: 30px 24px;
+    min-height: auto;
+    height: 100%;
   }
-  
-  .marqueeContainer::before,
-  .marqueeContainer::after {
-    width: 100px;
+
+  .quoteText {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .author {
+    font-size: 13px;
+  }
+
+  .role {
+    font-size: 10px;
   }
 }
 
