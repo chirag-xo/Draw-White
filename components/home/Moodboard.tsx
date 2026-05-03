@@ -36,7 +36,7 @@ const itemVariants: Variants = {
     opacity: 0,
     y: 30,
     scale: 0.96,
-    filter: "blur(6px)",
+    filter: "blur(10px)",
   },
   show: {
     opacity: 1,

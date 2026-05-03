@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 import AnimatedHeading from '@/components/animations/AnimatedHeading';
+import ImageReveal from '@/components/animations/ImageReveal';
 import { projects } from '@/data/projects';
 import { ProjectTransition, ProjectTransitionRef } from '@/components/projects/ProjectTransition';
 
@@ -284,7 +285,7 @@ export default function FeaturedProjectsCarousel() {
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(36px, 5vw, 64px)',
               fontWeight: 400,
-              letterSpacing: '-0.04em',
+              letterSpacing: 'var(--tracking-tight)',
               color: '#0D0D0D',
               margin: 0,
             }}
@@ -360,19 +361,21 @@ export default function FeaturedProjectsCarousel() {
                   willChange: 'transform',
                 }}
               >
-                <Image
-                  src={project.gallery[1] || project.img}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 680px, 1060px"
-                  priority={index < 3}
-                  style={{
-                    objectFit: 'cover',
-                    objectPosition: 'center',
-                    userSelect: 'none',
-                    pointerEvents: 'none',
-                  }}
-                />
+                <ImageReveal className="w-full h-full">
+                  <Image
+                    src={project.gallery[1] || project.img}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 680px, 1060px"
+                    priority={index < 3}
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'center',
+                      userSelect: 'none',
+                      pointerEvents: 'none',
+                    }}
+                  />
+                </ImageReveal>
               </div>
 
               {/* Non-active darkening */}

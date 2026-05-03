@@ -61,9 +61,9 @@ export default function HeroSection() {
         <AnimatePresence>
           <motion.div
             key={IMAGES[index]}
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
+            initial={{ opacity: 0, scale: 1.04, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 0.98, filter: 'blur(5px)' }}
             transition={{ duration: 2.5, ease: [0.4, 0, 0.2, 1] }}
             className={styles.imageWrapper}
           >

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import AnimatedHeading from '@/components/animations/AnimatedHeading';
+import ImageReveal from '@/components/animations/ImageReveal';
 import styles from './ImpactSection.module.css';
 
 type Stat = {
@@ -142,14 +143,17 @@ export default function ImpactSection() {
               <div className={styles.iconWrap}>
                 <div className={styles.iconInner}>
                   {stat.imageSrc ? (
-                    <Image
-                      src={stat.imageSrc}
-                      alt={stat.imageAlt ?? stat.title}
-                      fill
-                      className={styles.iconImage}
-                      sizes="144px"
-                      style={{ transform: stat.imageTransform }}
-                    />
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={stat.imageSrc}
+                        alt={stat.imageAlt ?? stat.title}
+                        fill
+                        unoptimized
+                        className={styles.iconImage}
+                        sizes="144px"
+                        style={{ transform: stat.imageTransform }}
+                      />
+                    </div>
                   ) : null}
                 </div>
               </div>

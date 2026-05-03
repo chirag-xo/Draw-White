@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import AnimatedHeading from '@/components/animations/AnimatedHeading';
 import RevealStagger from '@/components/animations/RevealStagger';
+import ImageReveal from '@/components/animations/ImageReveal';
 import styles from './media.module.css';
 
 const featuredPress = [
@@ -106,7 +107,7 @@ export default function MediaPage() {
       <div className={styles.pressGrid}>
         {featuredPress.map((item, i) => (
           <div key={i} className={styles.pressCard}>
-            <div className={styles.pressImageContainer}>
+            <ImageReveal delay={i * 0.15} className={styles.pressImageContainer}>
               <Image 
                 src={item.image} 
                 alt={item.title} 
@@ -115,7 +116,7 @@ export default function MediaPage() {
                 sizes="(max-width: 768px) 100vw, 33vw"
               />
               <div className={styles.pressOverlay} />
-            </div>
+            </ImageReveal>
             <div className={styles.pressInfo}>
               <div className={styles.pressTag}>Featured</div>
               <AnimatedHeading elementType="h3" className={styles.pressTitle}>

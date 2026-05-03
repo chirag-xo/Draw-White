@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { notFound, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import AnimatedHeading from '@/components/animations/AnimatedHeading';
+import ImageReveal from '@/components/animations/ImageReveal';
 import { projects } from '@/data/projects';
 import { ProjectTransition, ProjectTransitionRef } from '@/components/projects/ProjectTransition';
 import styles from './case-study.module.css';
@@ -42,14 +43,16 @@ export default function ProjectCaseStudy({ params }: Props) {
       {/* Hero */}
       <div className={styles.hero}>
         <div className={styles.heroImage}>
-          <Image
-            src={project.img}
-            alt={project.title}
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-            sizes="100vw"
-          />
+          <ImageReveal className="w-full h-full">
+            <Image
+              src={project.img}
+              alt={project.title}
+              fill
+              style={{ objectFit: 'cover' }}
+              priority
+              sizes="100vw"
+            />
+          </ImageReveal>
         </div>
         <div className={styles.heroOverlay} />
         <motion.div 
@@ -105,12 +108,8 @@ export default function ProjectCaseStudy({ params }: Props) {
       {/* Gallery Grid */}
       <div className={styles.imageGrid}>
         {project.gallery.map((img, i) => (
-          <motion.div 
+          <ImageReveal 
             key={i} 
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
             className={`${styles.narrativeImage} ${i % 3 === 0 ? styles.wide : ''}`}
           >
             <Image
@@ -120,7 +119,7 @@ export default function ProjectCaseStudy({ params }: Props) {
               style={{ objectFit: 'cover' }}
               sizes="(max-width: 900px) 100vw, 66vw"
             />
-          </motion.div>
+          </ImageReveal>
         ))}
       </div>
 
@@ -156,13 +155,15 @@ export default function ProjectCaseStudy({ params }: Props) {
         style={{ cursor: 'pointer' }}
       >
         <div className={styles.nextImage}>
-          <Image
-            src={nextProject.img}
-            alt={nextProject.title}
-            fill
-            style={{ objectFit: 'cover' }}
-            sizes="100vw"
-          />
+          <ImageReveal className="w-full h-full">
+            <Image
+              src={nextProject.img}
+              alt={nextProject.title}
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="100vw"
+            />
+          </ImageReveal>
           <div className={styles.nextOverlay} />
         </div>
         <div className={styles.nextContent}>

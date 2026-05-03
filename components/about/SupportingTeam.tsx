@@ -21,10 +21,12 @@ export default function SupportingTeam() {
 
     // Cards animation
     gsap.fromTo(cards,
-      { autoAlpha: 0, y: 40 },
+      { autoAlpha: 0, y: 40, filter: 'blur(10px)', scale: 0.98 },
       {
         autoAlpha: 1,
         y: 0,
+        filter: 'blur(0px)',
+        scale: 1,
         duration: 1.2,
         stagger: 0.1,
         ease: "expo.out",

@@ -5,6 +5,7 @@ import { useState, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import AnimatedHeading from '@/components/animations/AnimatedHeading';
+import ImageReveal from '@/components/animations/ImageReveal';
 import { projects } from '@/data/projects';
 import { ProjectTransition, ProjectTransitionRef } from '@/components/projects/ProjectTransition';
 import styles from './SelectedWorks.module.css';
@@ -73,7 +74,7 @@ export default function SelectedWorks() {
             fontFamily: 'var(--font-display)',
             fontSize: 'clamp(36px, 5vw, 64px)',
             fontWeight: 300,
-            letterSpacing: '-0.04em',
+            letterSpacing: 'var(--tracking-tight)',
             color: '#0D0D0D',
             lineHeight: 1.1,
           }}
@@ -85,8 +86,8 @@ export default function SelectedWorks() {
       {/* DESKTOP GALLERY */}
       <div className={styles.desktopOnly}>
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24, filter: 'blur(10px)', scale: 1.02 }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           style={{
@@ -400,19 +401,21 @@ export default function SelectedWorks() {
                 </AnimatePresence>
 
                 {/* Image */}
-                <Image
-                  src={project.src}
-                  alt={project.alt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 36rem"
-                  priority={index < 2}
-                  style={{
-                    objectFit: 'cover',
-                    display: 'block',
-                    transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)',
-                    transform: activeMobile === index ? 'scale(1)' : 'scale(1.05)',
-                  }}
-                />
+                <ImageReveal>
+                  <Image
+                    src={project.src}
+                    alt={project.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 36rem"
+                    priority={index < 2}
+                    style={{
+                      objectFit: 'cover',
+                      display: 'block',
+                      transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)',
+                      transform: activeMobile === index ? 'scale(1)' : 'scale(1.05)',
+                    }}
+                  />
+                </ImageReveal>
               </motion.div>
             </motion.div>
           ))}

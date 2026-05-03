@@ -54,9 +54,10 @@ export default function FounderSection() {
 
       // Initial States
       gsap.set(image, {
-        scale: 1.1,
+        scale: 1.15,
         yPercent: index % 2 === 0 ? 20 : -20,
-        opacity: 0
+        opacity: 0,
+        filter: 'blur(15px)'
       });
 
       gsap.set(mask, {
@@ -89,6 +90,7 @@ export default function FounderSection() {
         yPercent: 0,
         opacity: 1,
         scale: 1,
+        filter: 'blur(0px)',
         duration: 1.4,
         ease: "power3.out"
       }, "-=1");

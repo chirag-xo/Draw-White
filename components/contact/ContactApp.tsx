@@ -69,12 +69,106 @@ const fieldVariants = {
   }),
 };
 
+/* ── Custom Dropdown for Contact Form ── */
+const PropertyDropdown = ({
+  options,
+  value,
+  onChange,
+  label,
+}: {
+  options: string[];
+  value: string;
+  onChange: (val: string) => void;
+  label: string;
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const hasValue = value.length > 0;
+
+  return (
+    <div className={styles.dropdownWrapper} ref={containerRef}>
+      <span
+        className={`${styles.floatLabel} ${isOpen || hasValue ? styles.floatLabelActive : styles.floatLabelInactive
+          } ${isOpen ? styles.floatLabelFocused : ""}`}
+      >
+        {label}
+      </span>
+
+      <button
+        type="button"
+        className={styles.dropdownTrigger}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span className={styles.dropdownValue}>
+          {value}
+        </span>
+        <motion.svg
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={styles.dropdownArrow}
+        >
+          <path d="m6 9 6 6 6-6" />
+        </motion.svg>
+      </button>
+
+      {/* Underline layers */}
+      <div className={styles.lineBase} />
+      <div className={styles.lineActive} style={{ width: isOpen ? "100%" : "0%" }} />
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className={styles.dropdownMenu}
+          >
+            {options.map((option) => (
+              <button
+                key={option}
+                type="button"
+                className={`${styles.dropdownItem} ${value === option ? styles.dropdownItemActive : ""}`}
+                onClick={() => {
+                  onChange(option);
+                  setIsOpen(false);
+                }}
+              >
+                {option}
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 export default function ContactApp() {
   const sectionRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const [formType, setFormType] = useState<"message" | "callback">("message");
   const [isAnimating, setIsAnimating] = useState(false);
   const [selectedArea, setSelectedArea] = useState<string>("");
+  const [selectedProperty, setSelectedProperty] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -180,14 +274,12 @@ export default function ContactApp() {
                       <FloatingInput label="Email" type="email" />
                     </motion.div>
                     <motion.div custom={2} variants={fieldVariants} className={styles.fieldRow}>
-                      <div className={styles.selectWrap}>
-                        <select className={styles.select} defaultValue="">
-                          <option value="" disabled hidden>Property Type</option>
-                          {propertyTypes.map((type) => (
-                            <option key={type} value={type.toLowerCase()}>{type}</option>
-                          ))}
-                        </select>
-                      </div>
+                      <PropertyDropdown
+                        label="Property Type"
+                        options={propertyTypes}
+                        value={selectedProperty}
+                        onChange={setSelectedProperty}
+                      />
                     </motion.div>
                     <motion.div custom={3} variants={fieldVariants}>
                       <FloatingInput label="Your Message" isTextarea />

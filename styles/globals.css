@@ -116,7 +116,7 @@ button {
   --text-lead:    22px;
   --text-body:    17px;
   --text-small:   13px;
-  --text-eyebrow: 11px;
+  --text-eyebrow: 12px;
 
   /* Tracking */
   --tracking-tight:  -0.02em;
@@ -164,7 +164,7 @@ button {
     --text-lead:    18px;
     --text-body:    16px;
     --text-small:   13px;
-    --text-eyebrow: 10px;
+    --text-eyebrow: 11px;
   }
 }
 
@@ -177,7 +177,7 @@ button {
     --text-lead:    17px;
     --text-body:    16px;
     --text-small:   12px;
-    --text-eyebrow: 10px;
+    --text-eyebrow: 11px;
   }
 }
 

@@ -245,40 +245,74 @@
   width: 100%;
 }
 
-/* Native Select Styling */
-.select {
+/* Custom Dropdown Styling */
+.dropdownWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.dropdownTrigger {
   width: 100%;
   background: transparent;
   border: none;
-  border-bottom: 1px solid var(--color-border);
   padding: 24px 0 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  outline: none;
+}
+
+.dropdownValue {
   font-size: 15px;
   color: var(--color-text-primary);
-  outline: none;
-  appearance: none;
   font-family: inherit;
-  cursor: pointer;
-  border-radius: 0;
+  text-align: left;
 }
 
-.select:focus {
-  border-bottom-color: var(--color-text-primary);
+.dropdownArrow {
+  color: var(--color-text-muted);
+  transition: transform 0.3s var(--ease-out);
 }
 
-.selectWrap {
-  position: relative;
-}
-.selectWrap::after {
-  content: "";
+.dropdownMenu {
   position: absolute;
-  right: 8px;
-  top: 60%;
-  width: 8px;
-  height: 8px;
-  border-right: 1px solid var(--color-text-primary);
-  border-bottom: 1px solid var(--color-text-primary);
-  transform: translateY(-50%) rotate(45deg);
-  pointer-events: none;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  z-index: 50;
+  overflow: hidden;
+  padding: 8px 0;
+}
+
+.dropdownItem {
+  width: 100%;
+  padding: 12px 24px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dropdownItem:hover {
+  background: rgba(0, 0, 0, 0.02);
+  color: var(--color-text-primary);
+}
+
+.dropdownItemActive {
+  color: var(--color-text-primary);
+  background: rgba(0, 0, 0, 0.03);
+  font-weight: 500;
 }
 
 /* Area Section */
@@ -405,12 +439,14 @@
 
 .uploadTitle {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .uploadDesc {
   font-size: 12px;
   color: var(--color-text-muted);
+  letter-spacing: 0.01em;
 }
 
 .filesList {
