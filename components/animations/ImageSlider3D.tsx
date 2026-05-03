@@ -58,11 +58,26 @@ export default function ImageSlider3D({
   }, [autoPlay, interval, images.length]);
 
   return (
-    <section className={cn("w-full h-full flex items-center justify-center overflow-visible", containerClassName)}>
+    <section 
+      className={containerClassName}
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'visible'
+      }}
+    >
       {/* STAGE: Establishing the 3D Perspective Context */}
       <div 
-        className="relative w-full h-full flex items-center justify-center"
         style={{ 
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           perspective: perspective,
           perspectiveOrigin: "center",
           overflow: "visible" 
@@ -70,8 +85,13 @@ export default function ImageSlider3D({
       >
         {/* TRACK: The 3D container that preserves spatial depth */}
         <div 
-          className="relative w-full h-full flex items-center justify-center"
           style={{ 
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             transformStyle: "preserve-3d",
             overflow: "visible"
           }}
@@ -84,14 +104,13 @@ export default function ImageSlider3D({
             const total = images.length;
             if (offset > total / 2) offset -= total;
             if (offset < -total / 2) offset += total;
-
+            
             // Performance: Only render items in the vicinity of the viewer
             if (Math.abs(offset) > 3) return null;
-
+            
             return (
               <motion.div
                 key={index}
-                className="absolute"
                 initial={false}
                 animate={{
                   rotateY: offset * -25,       // Items curve away from the center
@@ -105,6 +124,7 @@ export default function ImageSlider3D({
                   ease: [0.32, 0.72, 0, 1]     // Boutique smooth easing
                 }}
                 style={{
+                  position: 'absolute',
                   width: cardWidth,
                   aspectRatio: cardAspectRatio,
                   transformOrigin: "center center",
@@ -115,10 +135,15 @@ export default function ImageSlider3D({
                 <img
                   src={src}
                   alt={`Slide ${index}`}
-                  className={cn(
-                    "w-full h-full object-cover rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)]",
-                    imageClassName
-                  )}
+                  className={imageClassName}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    borderRadius: '1rem',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    boxShadow: '0 20px 50px rgba(0,0,0,0.6)'
+                  }}
                 />
               </motion.div>
             );

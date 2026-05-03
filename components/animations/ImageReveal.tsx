@@ -11,6 +11,7 @@ interface ImageRevealProps {
   duration?: number;
   distance?: number;
   once?: boolean;
+  style?: React.CSSProperties;
 }
 
 export default function ImageReveal({
@@ -21,6 +22,7 @@ export default function ImageReveal({
   duration = 0.8,
   distance = 40,
   once = true,
+  style = {},
 }: ImageRevealProps) {
   const directions = {
     up: { y: distance },
@@ -45,13 +47,14 @@ export default function ImageReveal({
         x: 0, 
         y: 0 
       }}
-      viewport={{ once, margin: "0px", amount: "some" }}
+      viewport={{ once, margin: "100px", amount: 0.1 }}
       transition={{ 
         duration, 
         delay, 
         ease: [0.22, 1, 0.36, 1] // Custom cubic-bezier for premium feel
       }}
       className={`relative ${className}`}
+      style={style}
     >
       {children}
     </motion.div>

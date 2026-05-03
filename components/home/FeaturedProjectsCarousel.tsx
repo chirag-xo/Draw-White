@@ -361,7 +361,7 @@ export default function FeaturedProjectsCarousel() {
                   willChange: 'transform',
                 }}
               >
-                <ImageReveal className="w-full h-full">
+                <ImageReveal style={{ width: '100%', height: '100%' }}>
                   <Image
                     src={project.gallery[1] || project.img}
                     alt={project.title}

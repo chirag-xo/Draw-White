@@ -143,7 +143,7 @@ export default function ImpactSection() {
               <div className={styles.iconWrap}>
                 <div className={styles.iconInner}>
                   {stat.imageSrc ? (
-                    <div className="relative w-full h-full">
+                    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                       <Image
                         src={stat.imageSrc}
                         alt={stat.imageAlt ?? stat.title}

@@ -253,7 +253,7 @@ export default function SelectedWorks() {
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="w-full"
+              style={{ width: '100%' }}
             >
               <motion.div
                 style={{
@@ -401,7 +401,7 @@ export default function SelectedWorks() {
                 </AnimatePresence>
 
                 {/* Image */}
-                <ImageReveal>
+                <ImageReveal style={{ width: '100%', height: '100%' }}>
                   <Image
                     src={project.src}
                     alt={project.alt}

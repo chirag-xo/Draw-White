@@ -43,7 +43,7 @@ export default function ProjectCaseStudy({ params }: Props) {
       {/* Hero */}
       <div className={styles.hero}>
         <div className={styles.heroImage}>
-          <ImageReveal className="w-full h-full">
+          <ImageReveal style={{ width: '100%', height: '100%' }}>
             <Image
               src={project.img}
               alt={project.title}
@@ -155,7 +155,7 @@ export default function ProjectCaseStudy({ params }: Props) {
         style={{ cursor: 'pointer' }}
       >
         <div className={styles.nextImage}>
-          <ImageReveal className="w-full h-full">
+          <ImageReveal style={{ width: '100%', height: '100%' }}>
             <Image
               src={nextProject.img}
               alt={nextProject.title}
