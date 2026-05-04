@@ -68,11 +68,6 @@ export default function Moodboard() {
   const y3 = useTransform(scrollYProgress, [0, 1], [0, height * 1.25]);
   const y4 = useTransform(scrollYProgress, [0, 1], [0, height * 3]);
 
-  // Tablet staggered motion values (gentler than desktop)
-  const tabletY1 = useTransform(scrollYProgress, [0, 1], [0, height * 0.4]);
-  const tabletY2 = useTransform(scrollYProgress, [0, 1], [0, height * 0.8]);
-  const tabletY3 = useTransform(scrollYProgress, [0, 1], [0, height * 0.2]);
-
   // Static MotionValues of 0 used on mobile to disable parallax offsets
   const zero = useTransform(scrollYProgress, [0, 1], [0, 0]);
 
@@ -136,16 +131,11 @@ export default function Moodboard() {
         >
           {images.slice(0, isMobile ? 8 : 12).map((src, index) => {
             const columns = isMobile ? 2 : 3;
-            const isFirstRow = index < columns;
 
-            // Apply transform stagger on tablet, none on mobile or first row
-            let transformY = zero;
-            if (!isMobile && !isFirstRow) {
-              const colIndex = index % columns;
-              if (colIndex === 0) transformY = tabletY1;
-              else if (colIndex === 1) transformY = tabletY2;
-              else transformY = tabletY3;
-            }
+            // No parallax on tablet — scroll-driven y offsets push images outside
+            // the overflow:hidden container on iPad, making rows 2+ invisible.
+            // The whileInView fade-up below is sufficient for the entry effect.
+            const transformY = zero;
 
             // Keep tablet animation logic unchanged
             const initialTablet = isTablet ? { opacity: 0, y: 30 } : false;

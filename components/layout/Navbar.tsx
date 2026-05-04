@@ -44,6 +44,19 @@ function DesktopNav({ scrolled }: { scrolled: boolean }) {
     closeTimer.current = setTimeout(() => setDropdownOpen(false), 180);
   }, []);
 
+  const toggleDropdown = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setDropdownOpen((prev) => !prev);
+  }, []);
+
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const handleClickOutside = () => setDropdownOpen(false);
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [dropdownOpen]);
+
   useEffect(() => () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
   }, []);
@@ -71,7 +84,7 @@ function DesktopNav({ scrolled }: { scrolled: boolean }) {
           onMouseEnter={openDropdown}
           onMouseLeave={closeDropdown}
         >
-          <button className={styles.dropdownTrigger}>
+          <button className={styles.dropdownTrigger} onClick={toggleDropdown}>
             <span className={styles.rollTextOuter}>
               <span className={styles.rollTextInner} data-text="Studio">Studio</span>
             </span>

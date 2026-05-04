@@ -443,40 +443,54 @@
 
 /* ── Tablet Overrides (768px–1024px) ─────────────────── */
 @media (min-width: 768px) and (max-width: 1024px) {
+  /* Keep navbar at full height — no shrinking on tablet */
   .navbar {
-    height: 64px;
+    height: 80px;
   }
 
   .navbar.scrolled {
-    height: 56px;
+    height: 68px;
   }
 
-  /* Keep desktop nav at tablet, but tighten logo + CTA sizes */
+  /* Scale up logo for iPad legibility */
+  .logoLink svg {
+    height: 52px !important;
+  }
+
+  /* Increase nav link size for better readability on iPad */
   .navLink,
   .dropdownTrigger {
-    font-size: 12px;
+    font-size: 15px;
+    letter-spacing: 0.04em;
   }
 
-  /* Ensure CTA meets 44px touch target */
+  /* More breathing room between centred nav items */
+  .navCentre {
+    gap: clamp(32px, 4vw, 72px);
+  }
+
+  /* Larger CTA pill — more prominent and touch-friendly */
   .ctaCircle {
-    padding: 10px 16px;
-    min-height: 44px;
+    font-size: 13px;
+    letter-spacing: 0.07em;
+    padding: 12px 24px;
+    min-height: 48px;
     display: inline-flex;
     align-items: center;
   }
 
-  /* Dropdown: slightly wider for finger tapping */
+  /* Dropdown: larger font + finger-friendly tap targets */
   .dropdownItem {
-    padding: 13px 24px;
-    min-height: 44px;
+    padding: 14px 28px;
+    font-size: 13px;
+    min-height: 48px;
     display: flex;
     align-items: center;
   }
 
-  /* Touch-friendly hover state becomes active state */
   .dropdownItem:active {
     color: var(--color-text-primary);
     background: rgba(0, 0, 0, 0.06);
-    padding-left: 28px;
+    padding-left: 32px;
   }
 }

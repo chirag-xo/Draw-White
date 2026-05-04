@@ -134,22 +134,34 @@
 }
 
 /* ── Responsive ───────────────────────────────────────────────────────────── */
-@media (max-width: 820px) {
-  .section {
-    padding-top: 84px;
-    padding-bottom: 84px;
-  }
-}
 
 /* ── Tablet Overrides (768px–1024px) ─────────────────── */
 @media (min-width: 768px) and (max-width: 1024px) {
   .section {
-    padding-top: 72px;
-    padding-bottom: 72px;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    padding-left: clamp(32px, 6vw, 80px);
+    padding-right: clamp(32px, 6vw, 80px);
   }
 
   .inner {
-    gap: clamp(16px, 2.5vw, 28px);
+    gap: clamp(28px, 3.5vw, 44px);
+  }
+
+  /* Larger quote for premium feel */
+  .quote {
+    font-size: clamp(32px, 5vw, 56px);
+  }
+
+  /* Bigger attribution text */
+  .attributionName {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+  }
+
+  .attributionRole {
+    font-size: 11px;
+    letter-spacing: 0.16em;
   }
 
   /* Keep quote on one line as long as possible */
